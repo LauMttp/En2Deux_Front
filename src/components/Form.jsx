@@ -2,6 +2,7 @@ import React from "react";
 import Inputs from "./Inputs";
 
 const Form = ({
+  submitField,
   fields,
   formData,
   setFormData,
@@ -25,7 +26,7 @@ const Form = ({
             setFormData={setFormData}
           />
         ))}
-        <button type="submit">Sign Up</button>
+        <button type="submit">{submitField}</button>
       </form>
     </div>
   );

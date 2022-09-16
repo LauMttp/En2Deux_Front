@@ -42,7 +42,9 @@ const Signup = () => {
 
   return (
     <div className="Signup">
+      <h2>SIGN UP</h2>
       <Form
+        submitField="Sign Up"
         fields={fields}
         formData={user}
         setFormData={setUser}
