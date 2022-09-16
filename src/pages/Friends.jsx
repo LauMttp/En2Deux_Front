@@ -1,7 +1,7 @@
 import React from "react";
 
 const Friends = () => {
-  return <div>Friends</div>;
+  return <h2>Friends</h2>;
 };
 
 export default Friends;

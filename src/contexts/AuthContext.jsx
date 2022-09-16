@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// Step one: create a context object to import elsewhere
 const AuthContext = createContext();
-
+// Step one: create a context object to import elsewhere
 // Create the wrapper component
 const AuthContextWrapper = ({ children }) => {
+  const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,6 +36,7 @@ const AuthContextWrapper = ({ children }) => {
     localStorage.removeItem("AUTH_TOKEN");
     setToken("");
     setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
