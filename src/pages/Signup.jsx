@@ -1,0 +1,56 @@
+import React, { useState } from "react";
+import axios from "axios";
+import Form from "../components/Form";
+
+const Signup = () => {
+  const initialUserState = {
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    username: "",
+  };
+
+  const [user, setUser] = useState(initialUserState);
+
+  const baseUrl = "http://localhost:5005";
+
+  function createUser() {
+    const config = {
+      method: "post",
+      url: `${baseUrl}/api/auth/signup`,
+      headers: {},
+      data: user,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const fields = [
+    { id: "username", fieldName: "Username" },
+    { id: "email", fieldName: "Adresse e-mail", placeholder: "kash@kash.com" },
+    { id: "name", fieldName: "Name" },
+    { id: "surname", fieldName: "Surame" },
+    { type: "password", id: "password", fieldName: "Password" },
+  ];
+
+  return (
+    <div className="Signup">
+      <Form
+        fields={fields}
+        formData={user}
+        setFormData={setUser}
+        initialFormDataState={initialUserState}
+        submitFunc={createUser}
+      />
+    </div>
+  );
+};
+
+export default Signup;
