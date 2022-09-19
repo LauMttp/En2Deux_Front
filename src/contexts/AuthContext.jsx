@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +10,7 @@ const AuthContextWrapper = ({ children }) => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser]= useState(null)
 
   const checkLogin = (token) => {
     if (token) {
@@ -18,6 +20,16 @@ const AuthContextWrapper = ({ children }) => {
     }
   };
 
+  const authenticateUser = () =>{
+    axios.get("http://localhost:5005/api/user",{headers : { 'Authorization': `Bearer ${token}`}})
+    .then((res)=> {
+      setUser(res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
+  }
   // on initial render, check for existing token
   useEffect(() => {
     const existingToken = localStorage.getItem("AUTH_TOKEN");
@@ -25,6 +37,12 @@ const AuthContextWrapper = ({ children }) => {
     checkLogin(existingToken);
     setIsLoading(false);
   }, []);
+
+  useEffect(()=>{
+    if(token){
+      authenticateUser()
+    }
+  }, [token])
 
   const updateToken = (token) => {
     localStorage.setItem("AUTH_TOKEN", token);
@@ -38,10 +56,10 @@ const AuthContextWrapper = ({ children }) => {
     setIsLoggedIn(false);
     navigate("/");
   };
-
+  console.log(user)
   return (
     <AuthContext.Provider
-      value={{ isLoading, isLoggedIn, token, setToken: updateToken, logout }}
+      value={{ isLoading, isLoggedIn, user, setUser, token, setToken: updateToken, logout }}
     >
       {children}
     </AuthContext.Provider>
