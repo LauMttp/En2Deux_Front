@@ -1,5 +1,6 @@
 import React from "react";
 import Inputs from "./Inputs";
+import { Button } from "@mui/material";
 
 const Form = ({
   submitField,
@@ -26,7 +27,9 @@ const Form = ({
             setFormData={setFormData}
           />
         ))}
-        <button type="submit">{submitField}</button>
+        <Button variant="outlined" color="success" type="submit">
+          {submitField}
+        </Button>
       </form>
     </div>
   );
