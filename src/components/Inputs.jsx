@@ -1,4 +1,5 @@
 import React from "react";
+import TextField from "@mui/material/TextField";
 
 const Inputs = ({
   type = "text",
@@ -11,16 +12,16 @@ const Inputs = ({
   return (
     <div>
       <label htmlFor={id}>{fieldName}</label>
-
-      <input
+      <TextField
+        required
+        id={id}
         {...props}
         type={type}
-        id={id}
         value={formData[id]}
         onChange={(e) =>
           setFormData({ ...formData, [e.target.id]: e.target.value })
         }
-      ></input>
+      />
     </div>
   );
 };
