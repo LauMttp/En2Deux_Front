@@ -13,7 +13,6 @@ const Inputs = ({
     <div>
       <label htmlFor={id}>{fieldName}</label>
       <TextField
-        required
         id={id}
         {...props}
         type={type}
