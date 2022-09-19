@@ -7,29 +7,30 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Profile = () => {
   const { token, user, setUser } = useContext(AuthContext);
-  const [tempUser, setTempUser] = useState(user);
+  const [tempUser, setTempUser] = useState(null);
 
   useEffect(() => {
-    const config = {
-      method: "get",
-      url: "http://localhost:5005/api/user/",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setUser(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+    if(token) {
+        const config = {
+          method: "get",
+          url: "http://localhost:5005/api/user/",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+    
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            setTempUser(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+  }, [token]);
 
   const baseUrl = "http://localhost:5005";
-
   function updateUser() {
     const config = {
       method: "patch",

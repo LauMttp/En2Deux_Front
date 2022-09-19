@@ -15,7 +15,7 @@ const Form = ({
     submitFunc();
     setFormData(initialFormDataState);
   }
-
+if (!formData) return <p>Loading...</p>
   return (
     <div className="Form">
       <form onSubmit={handleSubmit}>
