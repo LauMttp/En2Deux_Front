@@ -6,8 +6,8 @@ import UserAvatar from "../components/UserAvatar";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Profile = () => {
-  const { token } = useContext(AuthContext);
-  const [user, setUser] = useState();
+  const { token, user, setUser } = useContext(AuthContext);
+  const [tempUser, setTempUser] = useState(user);
 
   useEffect(() => {
     const config = {
@@ -31,7 +31,6 @@ const Profile = () => {
   const baseUrl = "http://localhost:5005";
 
   function updateUser() {
-    const data = JSON.stringify({ user });
     const config = {
       method: "patch",
       url: `${baseUrl}/api/user/`,
@@ -39,12 +38,13 @@ const Profile = () => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      data: user,
+      data: tempUser,
     };
 
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        setUser(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -57,8 +57,7 @@ const Profile = () => {
     { id: "surname", fieldName: "Surame" },
     { id: "email", fieldName: "E-mail address", placeholder: "kash@kash.com" },
     { id: "phoneNumber", fieldName: "Phone Number" },
-    { id: "gender", fieldName: "Gender" },
-    { type: "password", id: "password", fieldName: "Password" },
+    { id: "gender", fieldName: "Gender", type: "select" },
   ];
 
   if (!user) return <p>Loading...</p>;
@@ -72,9 +71,9 @@ const Profile = () => {
         <Form
           submitField="Save"
           fields={fields}
-          formData={user}
-          setFormData={setUser}
-          initialFormDataState={user}
+          formData={tempUser}
+          setFormData={setTempUser}
+          initialFormDataState={tempUser}
           submitFunc={updateUser}
         />
       </Box>
