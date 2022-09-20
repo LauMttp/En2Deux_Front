@@ -4,9 +4,10 @@ import Form from "../components/Form";
 import { Box } from "@mui/system";
 import UserAvatar from "../components/UserAvatar";
 import { AuthContext } from "../contexts/AuthContext";
+import { Button } from "@mui/material";
 
 const Profile = () => {
-  const { token, user, setUser } = useContext(AuthContext);
+  const { token, user, setUser, logout } = useContext(AuthContext);
   const [tempUser, setTempUser] = useState(null);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const Profile = () => {
   }, [token]);
 
   const baseUrl = "http://localhost:5005";
+
   function updateUser() {
     const config = {
       method: "patch",
@@ -50,6 +52,24 @@ const Profile = () => {
       .catch(function (error) {
         console.log(error);
       });
+  }
+  function deleteUser() {
+    const config = {
+      method: "delete",
+      url: `${baseUrl}/api/user/`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    logout();
   }
 
   const fields = [
@@ -81,8 +101,12 @@ const Profile = () => {
           setFormData={setTempUser}
           initialFormDataState={tempUser}
           submitFunc={updateUser}
+          isSubmit={true}
         />
       </Box>
+      <Button variant="contained" color="error" onClick={deleteUser}>
+        Delete my account
+      </Button>
     </div>
   );
 };

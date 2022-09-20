@@ -53,6 +53,7 @@ const Login = () => {
         setFormData={setFormData}
         initialFormDataState={initialLoginState}
         submitFunc={logIn}
+        isSubmit={true}
       />
     </div>
   );
