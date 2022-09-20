@@ -24,9 +24,7 @@ const Inputs = ({
           id={id}
           value={formData[id]}
           label={fieldName}
-          onChange={(e) =>
-            setFormData({ ...formData, [e.target.id]: e.target.value })
-          }
+          onChange={(e) => setFormData({ ...formData, [id]: e.target.value })}
         >
           {props.values.map((val) => {
             return <MenuItem value={val}>{val}</MenuItem>;
@@ -41,16 +39,13 @@ const Inputs = ({
         <Stack spacing={3}>
           <DatePicker
             disablePast
+            id={id}
             label={fieldName}
             openTo="year"
             views={["year", "month", "day"]}
             value={formData[id]}
-            onChange={(e) => {
-              console.log(e);
-              setFormData({
-                ...formData,
-                [e.target.id]: dayjs(e.target.value),
-              });
+            onChange={(newValue) => {
+              setFormData({ ...formData, [id]: dayjs(newValue) });
             }}
             renderInput={(params) => <TextField {...params} />}
           />

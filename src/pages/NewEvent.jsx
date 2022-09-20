@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Form from "../components/Form";
 import { AuthContext } from "../contexts/AuthContext";
 
-
 const NewEvent = () => {
+  const navigate = useNavigate();
   const initialEventState = {
     name: "",
     description: "",
@@ -41,6 +41,7 @@ const NewEvent = () => {
       .catch(function (error) {
         console.log(error);
       });
+    navigate("/events");
   }
 
   const firstStepFields = [
