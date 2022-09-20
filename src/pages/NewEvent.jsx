@@ -1,12 +1,15 @@
-import { Button } from "@mui/material";
+import { Box, Button, InputLabel, TextField } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Form from "../components/Form";
 import { AuthContext } from "../contexts/AuthContext";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
+import dayjs from "dayjs";
 
 const NewEvent = () => {
-  const navigate = useNavigate();
   const initialEventState = {
     name: "",
     description: "",
@@ -16,12 +19,11 @@ const NewEvent = () => {
     informationGatheringDeadline: "",
     votingStageDeadline: "",
   };
-
+  const baseUrl = "http://localhost:5005";
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [event, setEvent] = useState(initialEventState);
   const [step, setStep] = useState(0);
-
-  const baseUrl = "http://localhost:5005";
 
   function createEvent() {
     const config = {
@@ -51,13 +53,15 @@ const NewEvent = () => {
       fieldName: "Description",
       placeholder: "250 characters max",
     },
+    { id: "durationInHours", fieldName: "Duration" },
     { id: "locationSuggestions", fieldName: "LocationSuggestions" },
   ];
 
-  const secondStepFields = [
-    { id: "dateSuggestion", fieldName: "Time Range", type: "date" },
-    { id: "durationInHours", fieldName: "Duration" },
-  ];
+  // const secondStepFields = [
+  //   { id: "dateSuggestion", fieldName: "Time Range", type: "date" },
+  //   { id: "durationInHours", fieldName: "Duration" },
+  // ];
+
   const thirdStepFields = [
     {
       id: "informationGatheringDeadline",
@@ -105,13 +109,23 @@ const NewEvent = () => {
     return (
       <div className="NewEvent">
         <h2>NEW EVENT</h2>
-        <Form
-          submitField="Create"
-          fields={secondStepFields}
-          formData={event}
-          setFormData={setEvent}
-          initialFormDataState={initialEventState}
-        />
+        <InputLabel htmlFor={event.dateSuggestion}>Time Range</InputLabel>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <StaticDateRangePicker
+            displayStaticWrapperAs="desktop"
+            value={event.dateSuggestion}
+            onChange={(newValue) => {
+              setEvent({ ...event, dateSuggestion: newValue });
+            }}
+            renderInput={(startProps, endProps) => (
+              <React.Fragment>
+                <TextField {...startProps} />
+                <Box sx={{ mx: 2 }}> to </Box>
+                <TextField {...endProps} />
+              </React.Fragment>
+            )}
+          />
+        </LocalizationProvider>
         <div>
           <Button
             variant="outlined"

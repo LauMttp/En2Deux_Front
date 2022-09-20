@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -47,7 +47,7 @@ const Events = () => {
       });
   }, [token]);
 
-  if (!token) return <p>Loading...</p>;
+  if (!token) return <CircularProgress color="secondary" />;
 
   return (
     <div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AuthContext } from "../contexts/AuthContext";
 import AllFriendInvitations from "../components/Friends/AllFriendInvitations";
 import AllFriends from "../components/Friends/AllFriends";
+import { CircularProgress } from "@mui/material";
 
 const Friends = () => {
   
@@ -49,7 +50,7 @@ const Friends = () => {
     getFriends()
   }, [token]);
   
-  if(!token) return <p>Loading...</p>
+  if(!token) return <CircularProgress color="secondary" />
   
   return (
     <div className="Friends">
