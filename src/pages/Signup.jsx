@@ -50,6 +50,7 @@ const Signup = () => {
         setFormData={setUser}
         initialFormDataState={initialUserState}
         submitFunc={createUser}
+        isSubmit={true}
       />
     </div>
   );

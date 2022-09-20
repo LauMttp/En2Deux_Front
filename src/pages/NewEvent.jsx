@@ -5,15 +5,16 @@ import axios from "axios";
 import Form from "../components/Form";
 import { AuthContext } from "../contexts/AuthContext";
 
+
 const NewEvent = () => {
   const initialEventState = {
     name: "",
     description: "",
     locationSuggestions: [],
     dateSuggestion: [],
-    durationInHours: undefined,
-    informationGatheringDeadline: undefined,
-    votingStageDeadline: undefined,
+    durationInHours: "",
+    informationGatheringDeadline: "",
+    votingStageDeadline: "",
   };
 
   const { token } = useContext(AuthContext);
@@ -53,15 +54,20 @@ const NewEvent = () => {
   ];
 
   const secondStepFields = [
-    { id: "dateSuggestion", fieldName: "Time Range" },
+    { id: "dateSuggestion", fieldName: "Time Range", type: "date" },
     { id: "durationInHours", fieldName: "Duration" },
   ];
   const thirdStepFields = [
     {
       id: "informationGatheringDeadline",
       fieldName: "informationGatheringDeadline",
+      type: "date",
     },
-    { id: "votingStageDeadline", fieldName: "votingStageDeadline" },
+    {
+      id: "votingStageDeadline",
+      fieldName: "votingStageDeadline",
+      type: "date",
+    },
   ];
   if (step === 0)
     return (

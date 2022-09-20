@@ -9,9 +9,6 @@ import Events from "./pages/Events";
 import Invitations from "./pages/Invitations";
 import Friends from "./pages/Friends";
 import Profile from "./pages/Profile";
-import NewEventDate from "./pages/NewEventDate";
-import NewEventLocation from "./pages/NewEventLocation";
-import NewEventDeadlines from "./pages/NewEventDeadlines";
 import { create } from "@mui/material/styles/createTransitions";
 import Layout from "./pages/Layout";
 
@@ -27,9 +24,6 @@ function App() {
 
           {/* Event creation phase */}
           <Route path="newevent" element={<NewEvent />} />
-          <Route path="newevent/date" element={<NewEventDate />} />
-          <Route path="newevent/location" element={<NewEventLocation />} />
-          <Route path="newevent/deadlines" element={<NewEventDeadlines />} />
 
           <Route path="events" element={<Events />} />
           <Route path="invitations" element={<Invitations />} />

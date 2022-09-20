@@ -1,6 +1,11 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import dayjs from "dayjs";
+import Stack from "@mui/material/Stack";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Inputs = ({
   type = "text",
@@ -18,7 +23,7 @@ const Inputs = ({
           type={type}
           id={id}
           value={formData[id]}
-          label="Gender"
+          label={fieldName}
           onChange={(e) =>
             setFormData({ ...formData, [e.target.id]: e.target.value })
           }
@@ -28,6 +33,25 @@ const Inputs = ({
           })}
         </Select>
       </FormControl>
+    );
+  if (type === "date")
+    return (
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <InputLabel htmlFor={id}>{fieldName}</InputLabel>
+        <Stack spacing={3}>
+          <DatePicker
+            disablePast
+            label={fieldName}
+            openTo="year"
+            views={["year", "month", "day"]}
+            value={formData[id]}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.id]: dayjs(e.target.value) })
+            }
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </Stack>
+      </LocalizationProvider>
     );
   return (
     <div>
