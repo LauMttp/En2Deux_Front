@@ -65,6 +65,7 @@ const Profile = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        setUser(response.data);
       })
       .catch(function (error) {
         console.log(error);

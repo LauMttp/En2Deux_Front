@@ -46,7 +46,7 @@ const Events = () => {
             </>
           ) : (
             events.map((event) => {
-              return <li key={event._id}>{event.name}</li>;
+              return <li key={event._id}>{event.event.name}</li>;
             })
           )}
         </ul>
