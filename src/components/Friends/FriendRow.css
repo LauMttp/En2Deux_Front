@@ -1,0 +1,12 @@
+.names {
+    font-size: 8px;
+}
+
+.profile, .username {
+    margin-right:10px;
+}
+
+.FriendRow {
+    margin:1px;
+    padding:2px;
+}

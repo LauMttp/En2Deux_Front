@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios';
 import { AuthContext } from "../contexts/AuthContext";
+import AllFriendInvitations from "../components/Friends/AllFriendInvitations";
+import AllFriends from "../components/Friends/AllFriends";
 
 const Friends = () => {
   
   const { token, user } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
-  const [invitations, setInvitations] = useState("");
-  
-  console.log("Friends:",friends)
-  console.log("Invitations", invitations)
+  const [invitations, setInvitations] = useState([]);
   
   useEffect (() => {
+    //get all friends list
     const config = {
       method: 'get',
       url: 'http://localhost:5005/api/friend/',
@@ -28,6 +28,7 @@ const Friends = () => {
       console.log(error);
     });
     
+    //get all invitations list
     const config2 = {
       method: 'get',
       url: 'http://localhost:5005/api/friend/invitations',
@@ -43,48 +44,15 @@ const Friends = () => {
     .catch(function (error) {
       console.log(error);
     });
-  }, [token]);
+  }, [token, friends, invitations]);
   
   if(!token) return <p>Loading...</p>
   
   return (
     <div className="Friends">
       <h1>Your friends</h1>
-        <h2> Invitations </h2>
-          <ul>
-            {
-              invitations.length === 0 ?
-              ( <>
-                  <li>No friend request.</li>
-                </>
-              ):(
-                invitations.map(request => {
-                  return ( 
-                    <li key={request._id}>
-                      {request.requestor.username}
-                    </li> 
-                  )
-                })
-              )
-            }
-          </ul>
-
-        <h2> Friends </h2>
-          <ul>
-            {
-              friends.length === 0 ?
-              ( <>
-                  <li>Your don't have friends yet.
-                  <br/>Add them with their usernames !</li>
-                </>
-              ):(
-                friends.map(friend => {
-                  return ( <li key={friend._id}> {friend.requestor._id === user._id  ?
-                      (friend.requested.username):(friend.requestor.username)} </li> )
-                })
-              )
-            }
-          </ul>
+        <AllFriendInvitations invitations={invitations}/>
+        <AllFriends friends={friends} user={user}/>
     </div>
 
   ) 
