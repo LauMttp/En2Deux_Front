@@ -45,9 +45,13 @@ const Inputs = ({
             openTo="year"
             views={["year", "month", "day"]}
             value={formData[id]}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.id]: dayjs(e.target.value) })
-            }
+            onChange={(e) => {
+              console.log(e);
+              setFormData({
+                ...formData,
+                [e.target.id]: dayjs(e.target.value),
+              });
+            }}
             renderInput={(params) => <TextField {...params} />}
           />
         </Stack>
