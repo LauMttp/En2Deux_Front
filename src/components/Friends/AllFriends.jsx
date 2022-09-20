@@ -5,7 +5,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
 
-const AllFriends = ({friends, user}) => {
+const AllFriends = ({friends, user, getFriends}) => {
+
   return (
     <div className='AllFriends'>
         <h2> Friends </h2>
@@ -17,19 +18,23 @@ const AllFriends = ({friends, user}) => {
                   <br/>Add them with their usernames !</li>
                 </>
               ):(
+                <>
                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {friends.map((friend) => {
-                  return (<ListItem key={friend._id} disablePadding>
-                            {
-                              friend.requestor._id === user._id  ?
-                              ( <FriendRow friend={friend.requested}/>
-                              ):(
-                                <FriendRow friend={friend.requestor}/>)
-                            }
-                          </ListItem>
+                  return (
+                    <ListItem key={friend._id} disablePadding>
+                      {
+                        friend.requestor._id === user._id  ?
+                        ( <FriendRow friendshipId={friend._id} friend={friend.requested} getFriends={getFriends}/>
+                        ):(
+                          <FriendRow friendshipId={friend._id} friend={friend.requestor} getFriends={getFriends}/>)
+
+                      }
+                    </ListItem>
                   )
                 })}
                 </List>
+                </>
               )
             }
           </ul>
@@ -37,22 +42,4 @@ const AllFriends = ({friends, user}) => {
   )
 }
 
-// const [checked, setChecked] = React.useState([1]);
-
-// const handleToggle = (value) => () => {
-//   const currentIndex = checked.indexOf(value);
-//   const newChecked = [...checked];
-
-//   if (currentIndex === -1) {
-//     newChecked.push(value);
-//   } else {
-//     newChecked.splice(currentIndex, 1);
-//   }
-
-//   setChecked(newChecked);
-// };
 export default AllFriends;
-
-    
-            
-         
