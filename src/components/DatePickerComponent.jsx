@@ -12,7 +12,7 @@ const DatePickerComponent = () => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack spacing={3}>
         <DatePicker
-          disableFuture
+          disablePast
           label="Responsive"
           openTo="year"
           views={["year", "month", "day"]}

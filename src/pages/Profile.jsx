@@ -10,23 +10,23 @@ const Profile = () => {
   const [tempUser, setTempUser] = useState(null);
 
   useEffect(() => {
-    if(token) {
-        const config = {
-          method: "get",
-          url: "http://localhost:5005/api/user/",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-    
-        axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            setTempUser(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+    if (token) {
+      const config = {
+        method: "get",
+        url: "http://localhost:5005/api/user/",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          setTempUser(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   }, [token]);
 
@@ -58,7 +58,12 @@ const Profile = () => {
     { id: "surname", fieldName: "Surame" },
     { id: "email", fieldName: "E-mail address", placeholder: "kash@kash.com" },
     { id: "phoneNumber", fieldName: "Phone Number" },
-    { id: "gender", fieldName: "Gender", type: "select" },
+    {
+      id: "gender",
+      fieldName: "Gender",
+      type: "select",
+      values: ["male", "female"],
+    },
   ];
 
   if (!user) return <p>Loading...</p>;

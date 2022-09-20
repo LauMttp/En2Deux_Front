@@ -15,8 +15,10 @@ const NewEvent = () => {
     informationGatheringDeadline: undefined,
     votingStageDeadline: undefined,
   };
+
   const { token } = useContext(AuthContext);
   const [event, setEvent] = useState(initialEventState);
+  const [step, setStep] = useState(0);
 
   const baseUrl = "http://localhost:5005";
 
@@ -40,7 +42,7 @@ const NewEvent = () => {
       });
   }
 
-  const fields = [
+  const firstStepFields = [
     { id: "name", fieldName: "Name" },
     {
       id: "description",
@@ -48,33 +50,103 @@ const NewEvent = () => {
       placeholder: "250 characters max",
     },
     { id: "locationSuggestions", fieldName: "LocationSuggestions" },
+  ];
+
+  const secondStepFields = [
     { id: "dateSuggestion", fieldName: "Time Range" },
     { id: "durationInHours", fieldName: "Duration" },
+  ];
+  const thirdStepFields = [
     {
       id: "informationGatheringDeadline",
       fieldName: "informationGatheringDeadline",
     },
     { id: "votingStageDeadline", fieldName: "votingStageDeadline" },
   ];
-
-  return (
-    <div className="NewEvent">
-      <h2>NEW EVENT</h2>
-      <Form
-        submitField="Create"
-        fields={fields}
-        formData={event}
-        setFormData={setEvent}
-        initialFormDataState={initialEventState}
-        submitFunc={createEvent}
-      />
-      <Link to="/newevent/date">
-        <Button variant="outlined" color="success">
-          Next Step
-        </Button>
-      </Link>
-    </div>
-  );
+  if (step === 0)
+    return (
+      <div className="NewEvent">
+        <h2>NEW EVENT</h2>
+        <Form
+          submitField="Create"
+          fields={firstStepFields}
+          formData={event}
+          setFormData={setEvent}
+          initialFormDataState={initialEventState}
+        />
+        <div>
+          <Link to="/events">
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={(e) => setStep(step - 1)}
+            >
+              Back
+            </Button>
+          </Link>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={(e) => setStep(step + 1)}
+          >
+            Next Step
+          </Button>
+        </div>
+      </div>
+    );
+  else if (step === 1)
+    return (
+      <div className="NewEvent">
+        <h2>NEW EVENT</h2>
+        <Form
+          submitField="Create"
+          fields={secondStepFields}
+          formData={event}
+          setFormData={setEvent}
+          initialFormDataState={initialEventState}
+        />
+        <div>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={(e) => setStep(step - 1)}
+          >
+            Back
+          </Button>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={(e) => setStep(step + 1)}
+          >
+            Next Step
+          </Button>
+        </div>
+      </div>
+    );
+  else if (step === 2)
+    return (
+      <div className="NewEvent">
+        <h2>NEW EVENT</h2>
+        <Form
+          submitField="Create"
+          fields={thirdStepFields}
+          formData={event}
+          setFormData={setEvent}
+          initialFormDataState={initialEventState}
+          submitFunc={createEvent}
+          isSubmit={true}
+        />
+        <div>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={(e) => setStep(step - 1)}
+          >
+            Back
+          </Button>
+        </div>
+      </div>
+    );
 };
 
 export default NewEvent;

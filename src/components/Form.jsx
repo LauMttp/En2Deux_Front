@@ -8,6 +8,7 @@ const Form = ({
   formData,
   setFormData,
   initialFormDataState,
+  isSubmit,
   submitFunc,
 }) => {
   function handleSubmit(e) {
@@ -15,7 +16,7 @@ const Form = ({
     submitFunc();
     setFormData(initialFormDataState);
   }
-if (!formData) return <p>Loading...</p>
+  if (!formData) return <p>Loading...</p>;
   return (
     <div className="Form">
       <form onSubmit={handleSubmit}>
@@ -27,9 +28,13 @@ if (!formData) return <p>Loading...</p>
             setFormData={setFormData}
           />
         ))}
-        <Button variant="outlined" color="success" type="submit">
-          {submitField}
-        </Button>
+        {isSubmit ? (
+          <Button variant="outlined" color="success" type="submit">
+            {submitField}
+          </Button>
+        ) : (
+          <div></div>
+        )}
       </form>
     </div>
   );
