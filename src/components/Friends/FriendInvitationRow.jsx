@@ -5,57 +5,64 @@ import './FriendInvitationRow.css'
 import axios from 'axios'
 import { AuthContext } from '../../contexts/AuthContext'
 
-const FriendInvitationRow = ({invitationId, requestor}) => {
+const FriendInvitationRow = ({invitationId, requestor, getFriends}) => {
     const {token} = useContext(AuthContext);
     const baseUrl = "http://localhost:5005";
-    const handleAccept = () => {
-        const data = JSON.stringify({
-            "answer": "yes"
-          });
+    // const handleAccept = () => {
+    //     const data = JSON.stringify({
+    //         "answer": "yes"
+    //       });
 
-        const config = {
-        method: 'patch',
-        url: `${baseUrl}/api/friend/${invitationId}`,
-        headers: { 
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        data : data
-        };
+    //     const config = {
+    //     method: 'patch',
+    //     url: `${baseUrl}/api/friend/${invitationId}`,
+    //     headers: { 
+    //         'Authorization': `Bearer ${token}`,
+    //         'Content-Type': 'application/json'
+    //     },
+    //     data : data
+    //     };
 
-        axios(config)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
+    //     axios(config)
+    //     .then(function (response) {
+    //     console.log(JSON.stringify(response.data));
+    //     getFriends();
+    //     })
+    //     .catch(function (error) {
+    //     console.log(error);
+    //     });
+    // }
+
+    const handleResponse = (string) => {
+ 
+            const data = JSON.stringify({
+                "answer": string,
+              });
+        
+            const config = {
+            method: 'patch',
+            url: `${baseUrl}/api/friend/${invitationId}`,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+        
+            axios(config)
+            .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            getFriends();
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
+
+        
     }
+    // const handleDecline = () => {
 
-    const handleDecline = () => {
-        const data = JSON.stringify({
-            "answer": "no"
-          });
-          
-        var config = {
-        method: 'patch',
-        url: `${baseUrl}/api/friend/${invitationId}`,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        data : data
-        };
-
-        axios(config)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-
-    }
+    // }
 
   return (
     <div className='FriendInvitationRow'>
@@ -65,9 +72,8 @@ const FriendInvitationRow = ({invitationId, requestor}) => {
             </ListItemAvatar>
             <ListItemText id={requestor._id} primary={requestor.username} secondary={`${requestor.name} ${requestor.surname}`} />
         </ListItemButton>
-        {/* <Button variant="text">Text</Button> */}
-        <Button className='button' id="accepted" variant="contained" onClick={handleAccept}>Accept</Button>
-        <Button className='button' id="declined" variant="outlined" onClick={handleDecline}>Decline</Button>
+        <Button className='button' id="accepted" variant="contained" onClick={() => handleResponse('yes')}>Accept</Button>
+        <Button className='button' id="declined" variant="outlined" onClick={() => handleResponse('no')}>Decline</Button>
     </div>
   )
 }

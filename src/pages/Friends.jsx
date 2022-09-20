@@ -9,8 +9,8 @@ const Friends = () => {
   const { token, user } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
   const [invitations, setInvitations] = useState([]);
-  
-  useEffect (() => {
+
+  const getFriends = () => {
     //get all friends list
     const config = {
       method: 'get',
@@ -22,7 +22,7 @@ const Friends = () => {
     
     axios(config)
     .then(function (response) {
-      setFriends(response.data);
+        setFriends(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -44,15 +44,18 @@ const Friends = () => {
     .catch(function (error) {
       console.log(error);
     });
-  }, [token, friends, invitations]);
+  }
+  useEffect (() => {
+    getFriends()
+  }, [token]);
   
   if(!token) return <p>Loading...</p>
   
   return (
     <div className="Friends">
       <h1>Your friends</h1>
-        <AllFriendInvitations invitations={invitations}/>
-        <AllFriends friends={friends} user={user}/>
+        <AllFriendInvitations invitations={invitations} getFriends={getFriends}/>
+        <AllFriends friends={friends} user={user} getFriends={getFriends}/>
     </div>
 
   ) 
