@@ -1,23 +1,17 @@
-import {
-  Autocomplete,
-  Button,
-  CircularProgress,
-  InputLabel,
-  Slider,
-  TextField,
-} from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import "./SingleEvent.css";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import Box from "@mui/material/Box";
+import Informations from "../components/Events/SingleEvent/Informations";
+import Attendees from "../components/Events/SingleEvent/Attendees";
+import Stage from "../components/Events/SingleEvent/Stage";
 
 const SingleEvent = () => {
   const { token, user } = useContext(AuthContext);
   const { eventId } = useParams();
   const [eventData, setEventData] = useState("");
-  const [attendeeInfos, setAttendeeInfos] = useState("");
   const baseUrl = "http://localhost:5005";
 
   useEffect(() => {
@@ -70,86 +64,9 @@ const SingleEvent = () => {
 
   return (
     <div>
-      <Box>
-        <h1>{eventData.event.name}</h1>
-        <p>Created by : {eventData.event.author}</p>
-        <h4>Administrators</h4>
-        {eventData.attendees.map((attendee) =>
-          attendee.isAdmin ? <p>{attendee.user}</p> : null
-        )}
-        <p>Description : {eventData.event.description}</p>
-        {eventData.event.isAdmin && <Button size="small">Edit </Button>}
-        <p>Duration: {eventData.event.durationInHours / 24} days</p>
-      </Box>
-
-      <Box>
-        <h4>Attendees</h4>
-        {eventData.attendees.map((attendee) => {
-          return !attendee.isAdmin ? (
-            <>
-              <p>{attendee.user}</p>
-              {eventData.event.stage === "Information gathering" &&
-                eventData.event.isAdmin && (
-                  <Button
-                    size="small"
-                    onClick={() => deleteAttendee(attendee._id)}
-                  >
-                    Delete
-                  </Button>
-                )}
-            </>
-          ) : null;
-        })}
-      </Box>
-      <div className="Stage">
-        <h2>Stage : {eventData.event.stage}</h2>
-        {eventData.event.isAdmin && (
-          <Button size="small">close the current stage</Button>
-        )}
-      </div>
-      <Box className="Gathering">
-        {eventData.event.stage === "Information gathering" && (
-          <div>
-            Deadline to fill your informations :{" "}
-            {eventData.event.informationGatheringDeadline}
-            <InputLabel htmlFor={eventData.dateSuggestion}>
-              Your availabilities
-            </InputLabel>
-            <InputLabel htmlFor={eventData.dateSuggestion}>
-              What is your daily budget for the housing ?
-            </InputLabel>
-            <Slider
-              defaultValue={50}
-              aria-label="Default"
-              valueLabelDisplay="auto"
-            />
-            <InputLabel htmlFor="location">
-              Select your prefered location
-            </InputLabel>
-            <Autocomplete
-              disablePortal
-              id="location"
-              options={eventData.event.locationSuggestions}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Locations" />
-              )}
-            />
-            <Button size="small">submit</Button>
-          </div>
-        )}
-      </Box>
-      <Box className="Voting">
-        {eventData.event.stage === "Voting stage" && (
-          <div>
-            <p>
-              Deadline to vote for the best options :{" "}
-              {eventData.event.votingStageDeadline}
-            </p>
-            <p>Options to be displayed</p>
-          </div>
-        )}
-      </Box>
+      <Informations eventData={eventData} />
+      <Attendees eventData={eventData} deleteAttendee={deleteAttendee} />
+      <Stage eventData={eventData} />
     </div>
   );
 };
