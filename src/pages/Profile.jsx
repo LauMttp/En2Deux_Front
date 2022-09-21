@@ -53,6 +53,8 @@ const Profile = () => {
         console.log(error);
       });
   }
+  
+  //DEL USER ACCOUNT
   function deleteUser() {
     const config = {
       method: "delete",

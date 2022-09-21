@@ -1,0 +1,12 @@
+.admin span {
+    color: grey;
+    font-size: 12px;
+}
+
+.admin-box {
+    width:250px;
+    border:1px solid black;
+    padding:20px 20px 20px 40px;
+    border-radius: 5%;
+    margin: 20px 0px;
+}

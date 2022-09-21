@@ -60,45 +60,13 @@ const Friends = () => {
   
   return (
     <div className="Friends">
-      <h1>Your friends</h1>
-        {/* <SearchBar list={allUsers} func={getAllUsers}/> */}
-        
+      <h1>Your friends</h1>        
         <SearchBar friends={friends}/>
-        <List>
-        
-        </List>
         <AllFriendInvitations invitations={invitations} getFriends={getFriends}/>
         <AllFriends friends={friends} user={user} getFriends={getFriends}/>
     </div>
 
   ) 
 };
-
-
-        // <div className='usersList'>
-        //   {allUsers
-        //   .filter(user => user.username.toLowerCase().includes(searchQuery.toLowerCase()))
-        //   .map(({username}) => {return <li key={username} {...{ username}} /> 
-        //   })}
-        // </div>
-
-        // const getAllUsers = () => {
-        //   const config = {
-        //     method: 'get',
-        //     url: 'http://localhost:5005/api/user/',
-        //     headers: { 
-        //       'Authorization': `Bearer ${token}`
-        //     }
-        //   };
-          
-        //   axios(config)
-        //   .then(function (response) {
-        //     console.log(JSON.stringify(response.data));
-        //     setAllUsers(response.data);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
-        // }
 
 export default Friends;

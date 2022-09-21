@@ -1,9 +1,12 @@
+import { CircularProgress } from '@mui/material'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import FriendInvitationRow from './FriendInvitationRow'
 
 const AllFriendInvitations = ({invitations, getFriends}) => {
   const {user} = useContext(AuthContext)
+  if(!user) return <CircularProgress color="secondary" />;
+
   return (
     <div className='AllFriendInvitations'>
       <h2> Invitations </h2>

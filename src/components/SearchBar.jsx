@@ -9,17 +9,17 @@ import UserAvatar from './UserAvatar';
 
 
 
-function SearchBar ({friends}) {
+function SearchBar () {
     const initialSearchState='Please select a user';
     const {token, user} = useContext(AuthContext)
     const [allUsers, setAllUsers]= useState([])
     const [searchQuery, setSearchQuery] = useState(initialSearchState)
     const [oneUser, setOneUser] = useState(null)
-    const [reqSent, setReqSent] = useState([false, ""])
+    const [reqSent, setReqSent] = useState(false)
     const [isFriend, setIsFriend] = useState(false)
+    const [userIs, setUserIs] = useState("")
 
-    console.log(oneUser)
-
+    //GET ALL USERS
     useEffect(() => {
           const config = {
             method: 'get',
@@ -40,7 +40,8 @@ function SearchBar ({friends}) {
 
     }, []);
 
-    //WHEN CLICK ON SEARCH
+    //WHEN CLICK ON SEARCH SHOULD RETURN
+    //BUTTON THAT CORRESPONDS THE SEARCHED USER
     const handleSearch = () => {
         const config = {
             method: 'get',
@@ -49,7 +50,7 @@ function SearchBar ({friends}) {
               'Authorization': `Bearer ${token}`
             }
           };
-          
+        console.log("search:", searchQuery)
         axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
@@ -63,7 +64,9 @@ function SearchBar ({friends}) {
           
     }
 
-    //AFTER handleSearch() WHEN DISPLAY USER
+    // handleSearch() CALLS THIS FUNCTION 
+    // CHECKS IF A FRIENDSHIP EXIST
+    // IF EXIST => "FRIEND"
     const checkFriendship = (username) => {
         const config = {
             method: 'get',
@@ -73,14 +76,17 @@ function SearchBar ({friends}) {
             }
           };
           
+          setReqSent(false)
+          
           axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
+            setUserIs("")
             if(response.data.length>0){
-                setIsFriend(true)
+              setIsFriend(true)
             } else {
-                setIsFriend(false)
-                checkInvite()
+              setIsFriend(false)
+              checkInvite()
             }
           })
           .catch(function (error) {
@@ -88,6 +94,11 @@ function SearchBar ({friends}) {
           });
     }
 
+    //checkFriendship() CALLS THIS FUNCTION
+    //IF NO FRIENDSHIP, IT CHECKS IF AN INVITE HAS BEEN SENT
+    //IF INVITE SENT BY CURRENT USER => "PENDING"
+    //IF INVITE SENT BY ANOTHER USER TO CURRENT USER => "CHECK YOUR INVITATIONS"
+    //IF NO INVITE AND NO FRIEND => "ADD"
     const checkInvite = () => {
         const config = {
             method: 'get',
@@ -96,30 +107,33 @@ function SearchBar ({friends}) {
               'Authorization': `Bearer ${token}`
             }
         };
+
+        setIsFriend(false)
           
         axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
             if(response.data.length>0){
-                if(response.data.requestor.username === user.username )
-                    setReqSent([true, "requestor"]);
-                else{
-                    setReqSent([true, "requested"])
+                console.log("res.data", response.data)
+                setReqSent(true)
+                if(response.data[0].requestor.username === user.username ){
+                    setUserIs("requestor");
+                }else{
+                    setUserIs("requested");
                 }
-                
             }else{
-                setReqSent([false], "")
+                setReqSent(false)
+                setIsFriend(false)
+                setUserIs("")
             }
-
-          })
+        })
           .catch(function (error) {
             console.log(error);
-          });
-          
+        });
     }
 
     //IF FRIENDSHIP DOES NOT EXIST
-    const handleInvite = () =>{
+    const handleAdd = () =>{
         const config = {
             method: 'post',
             url: `http://localhost:5005/api/friend/${oneUser[0]._id}`,
@@ -141,8 +155,8 @@ function SearchBar ({friends}) {
     console.log("allUsers", allUsers)
     console.log("oneUser", oneUser)
     console.log("searchQuery", searchQuery)
-    return (
 
+    return (
         <>
         <Autocomplete
             value={searchQuery}
@@ -153,9 +167,7 @@ function SearchBar ({friends}) {
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Search a username" />}
         />
-        <Button variant="outlined" color="success" onClick={handleSearch}>
-        Search
-        </Button>
+        <Button variant="outlined" color="success" onClick={handleSearch}>Search</Button>
         <div>
            { oneUser ?
             (<>
@@ -170,9 +182,9 @@ function SearchBar ({friends}) {
                 <Button className='add-button' variant="contained" >
                 Friend
                 </Button>
-                ):(
-                reqSent[0] ?
-                    (reqSent[1]==="requestor" ?
+                ): (
+                reqSent ?
+                    (userIs==="requestor" ?
                         (<Button className='add-button' variant="contained">
                         Pending
                         </Button>
@@ -182,11 +194,12 @@ function SearchBar ({friends}) {
                         </Button>
                         )
                     ):(
-                        <Button className='add-button' variant="contained" onClick={handleInvite}>
+                        <Button className='add-button' variant="contained" onClick={handleAdd}>
                         Send Invite
                         </Button>
                     )
-                )}
+                )
+            }
             </>
             ): (
                 <></>
