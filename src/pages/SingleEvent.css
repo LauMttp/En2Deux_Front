@@ -1,0 +1,6 @@
+.Stage {
+    display:flex;
+    flex-flow:row;
+    margin:1px;
+    padding:2px;
+}

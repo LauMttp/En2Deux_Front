@@ -6,8 +6,8 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Events = () => {
   const { token } = useContext(AuthContext);
-  const [events, setEvents] = useState([]);
-  const [invitations, setInvitations] = useState([]);
+  const [adminAttendances, setAdminAttendances] = useState([]);
+  const [notAdminAttendances, setNotAdminAttendances] = useState([]);
 
   const baseUrl = "http://localhost:5005";
 
@@ -22,7 +22,7 @@ const Events = () => {
 
     axios(config)
       .then(function (response) {
-        setEvents(response.data);
+        setAdminAttendances(response.data);
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
@@ -31,7 +31,7 @@ const Events = () => {
 
     const config2 = {
       method: "get",
-      url: `${baseUrl}/api/event/invitations`,
+      url: `${baseUrl}/api/event/byrole/notAdmin`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -39,7 +39,7 @@ const Events = () => {
 
     axios(config2)
       .then(function (response) {
-        setInvitations(response.data);
+        setNotAdminAttendances(response.data);
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
@@ -52,9 +52,15 @@ const Events = () => {
   return (
     <div>
       <h2>Events</h2>
+      <Link to="/newevent">
+        <Button variant="contained" color="success">
+          Create new event
+        </Button>
+      </Link>
       <div>
+        <h4>Administrated event</h4>
         <ul>
-          {events.length === 0 ? (
+          {adminAttendances.length === 0 ? (
             <>
               <li>
                 Your don't have events yet.
@@ -63,31 +69,38 @@ const Events = () => {
               </li>
             </>
           ) : (
-            events.map((event) => {
-              return <li key={event._id}>{event.event.name}</li>;
+            adminAttendances.map((attendance) => {
+              console.log(attendance);
+              return (
+                <div key={attendance.event._id}>
+                  <h4>{attendance.event.name}</h4>
+                  <Link to={`/events/${attendance.event._id}`}>
+                    <Button variant="outlined" color="success" size="small">
+                      View event{" "}
+                    </Button>
+                  </Link>
+                </div>
+              );
             })
           )}
         </ul>
       </div>
-      <h2>Invitations</h2>
       <div>
-        <ul>
-          {invitations.length === 0 ? (
-            <>
-              <li>Your don't have invitations yet.</li>
-            </>
-          ) : (
-            invitations.map((invitation) => {
-              return <li key={invitation._id}>{invitation.event.name}</li>;
-            })
-          )}
-        </ul>
+        <h4>Not administrated event</h4>
+        {notAdminAttendances.map((attendance) => {
+          console.log(attendance);
+          return (
+            <div key={attendance.event._id}>
+              <h4>{attendance.event.name}</h4>
+              <Link to={`/events/${attendance.event._id}`}>
+                <Button variant="outlined" color="success" size="small">
+                  View event{" "}
+                </Button>
+              </Link>
+            </div>
+          );
+        })}
       </div>
-      <Link to="/newevent">
-        <Button variant="contained" color="success">
-          Create new event
-        </Button>
-      </Link>
     </div>
   );
 };
