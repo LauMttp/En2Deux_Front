@@ -6,7 +6,8 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Events = () => {
   const { token } = useContext(AuthContext);
-  const [attendances, setAttendances] = useState([]);
+  const [adminAttendances, setAdminAttendances] = useState([]);
+  const [notAdminAttendances, setNotAdminAttendances] = useState([]);
 
   const baseUrl = "http://localhost:5005";
 
@@ -21,7 +22,24 @@ const Events = () => {
 
     axios(config)
       .then(function (response) {
-        setAttendances(response.data);
+        setAdminAttendances(response.data);
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    const config2 = {
+      method: "get",
+      url: `${baseUrl}/api/event/byrole/notAdmin`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(config2)
+      .then(function (response) {
+        setNotAdminAttendances(response.data);
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
@@ -40,8 +58,9 @@ const Events = () => {
         </Button>
       </Link>
       <div>
+        <h4>Administrated event</h4>
         <ul>
-          {attendances.length === 0 ? (
+          {adminAttendances.length === 0 ? (
             <>
               <li>
                 Your don't have events yet.
@@ -50,7 +69,7 @@ const Events = () => {
               </li>
             </>
           ) : (
-            attendances.map((attendance) => {
+            adminAttendances.map((attendance) => {
               console.log(attendance);
               return (
                 <div key={attendance.event._id}>
@@ -65,6 +84,22 @@ const Events = () => {
             })
           )}
         </ul>
+      </div>
+      <div>
+        <h4>Not administrated event</h4>
+        {notAdminAttendances.map((attendance) => {
+          console.log(attendance);
+          return (
+            <div key={attendance.event._id}>
+              <h4>{attendance.event.name}</h4>
+              <Link to={`/events/${attendance.event._id}`}>
+                <Button variant="outlined" color="success" size="small">
+                  View event{" "}
+                </Button>
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

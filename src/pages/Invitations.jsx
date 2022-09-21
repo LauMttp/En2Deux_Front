@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import "./Invitations.css";
 
 const Invitations = () => {
   const { token } = useContext(AuthContext);
@@ -22,12 +23,35 @@ const Invitations = () => {
     axios(config)
       .then(function (response) {
         setInvitations(response.data);
-        console.log(JSON.stringify(response.data));
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, [token]);
+
+  const handleResponse = (invitationId, string) => {
+    const data = JSON.stringify({
+      answer: string,
+    });
+    const config = {
+      method: "patch",
+      url: `${baseUrl}/api/attendee/${invitationId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   if (!token) return <CircularProgress color="secondary" />;
 
@@ -41,7 +65,34 @@ const Invitations = () => {
           </>
         ) : (
           invitations.map((invitation) => {
-            return <li key={invitation._id}>{invitation.event.name}</li>;
+            return (
+              <div className="Invitation" key={invitation.event._id}>
+                <h4>{invitation.event.name}</h4>
+                <Link to={`/events/${invitation.event._id}`}>
+                  <Button variant="outlined" color="success" size="small">
+                    View event{" "}
+                  </Button>
+                </Link>
+                <Button
+                  className="button"
+                  id="accepted"
+                  color="success"
+                  variant="contained"
+                  onClick={() => handleResponse(invitation._id, "yes")}
+                >
+                  Accept
+                </Button>
+                <Button
+                  className="button"
+                  id="declined"
+                  color="error"
+                  variant="outlined"
+                  onClick={() => handleResponse(invitation._id, "no")}
+                >
+                  Decline
+                </Button>
+              </div>
+            );
           })
         )}
       </ul>

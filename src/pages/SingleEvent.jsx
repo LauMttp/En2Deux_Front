@@ -1,4 +1,12 @@
-import { Button, CircularProgress } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  CircularProgress,
+  InputLabel,
+  Slider,
+  TextField,
+} from "@mui/material";
+import "./SingleEvent.css";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +17,7 @@ const SingleEvent = () => {
   const { token, user } = useContext(AuthContext);
   const { eventId } = useParams();
   const [eventData, setEventData] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
+  const [attendeeInfos, setAttendeeInfos] = useState("");
   const baseUrl = "http://localhost:5005";
 
   useEffect(() => {
@@ -33,7 +41,6 @@ const SingleEvent = () => {
           }
         }
         setEventData(response.data);
-        // setIsLoading(true);
         console.log(response.data);
       })
       .catch(function (error) {
@@ -41,8 +48,25 @@ const SingleEvent = () => {
       });
   }, [token, user]);
 
+  const deleteAttendee = (attendeeId) => {
+    const config = {
+      method: "delete",
+      url: `${baseUrl}/api/attendee/${attendeeId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   if (!eventData) return <CircularProgress color="secondary" />;
-  // if (!isLoading) return <CircularProgress color="secondary" />;
 
   return (
     <div>
@@ -54,9 +78,8 @@ const SingleEvent = () => {
           attendee.isAdmin ? <p>{attendee.user}</p> : null
         )}
         <p>Description : {eventData.event.description}</p>
-        {eventData.event.isAdmin && <button>Edit </button>}
+        {eventData.event.isAdmin && <Button size="small">Edit </Button>}
         <p>Duration: {eventData.event.durationInHours / 24} days</p>
-        <p>Stage : {eventData.event.stage}</p>
       </Box>
 
       <Box>
@@ -65,16 +88,68 @@ const SingleEvent = () => {
           return !attendee.isAdmin ? (
             <>
               <p>{attendee.user}</p>
-              {eventData.event.stage === "Information gathering" && (
-                <button>Delete</button>
-              )}
+              {eventData.event.stage === "Information gathering" &&
+                eventData.event.isAdmin && (
+                  <Button
+                    size="small"
+                    onClick={() => deleteAttendee(attendee._id)}
+                  >
+                    Delete
+                  </Button>
+                )}
             </>
           ) : null;
         })}
-        <p>{JSON.stringify(eventData.event)}</p>
-        <p>{JSON.stringify(eventData.attendees)}</p>
       </Box>
-      <Button size="small">{eventId}</Button>
+      <div className="Stage">
+        <h2>Stage : {eventData.event.stage}</h2>
+        {eventData.event.isAdmin && (
+          <Button size="small">close the current stage</Button>
+        )}
+      </div>
+      <Box className="Gathering">
+        {eventData.event.stage === "Information gathering" && (
+          <div>
+            Deadline to fill your informations :{" "}
+            {eventData.event.informationGatheringDeadline}
+            <InputLabel htmlFor={eventData.dateSuggestion}>
+              Your availabilities
+            </InputLabel>
+            <InputLabel htmlFor={eventData.dateSuggestion}>
+              What is your daily budget for the housing ?
+            </InputLabel>
+            <Slider
+              defaultValue={50}
+              aria-label="Default"
+              valueLabelDisplay="auto"
+            />
+            <InputLabel htmlFor="location">
+              Select your prefered location
+            </InputLabel>
+            <Autocomplete
+              disablePortal
+              id="location"
+              options={eventData.event.locationSuggestions}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Locations" />
+              )}
+            />
+            <Button size="small">submit</Button>
+          </div>
+        )}
+      </Box>
+      <Box className="Voting">
+        {eventData.event.stage === "Voting stage" && (
+          <div>
+            <p>
+              Deadline to vote for the best options :{" "}
+              {eventData.event.votingStageDeadline}
+            </p>
+            <p>Options to be displayed</p>
+          </div>
+        )}
+      </Box>
     </div>
   );
 };

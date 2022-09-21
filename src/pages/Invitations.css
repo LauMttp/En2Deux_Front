@@ -1,0 +1,8 @@
+.Invitation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 1px;
+  padding: 2px;
+}
