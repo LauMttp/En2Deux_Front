@@ -30,7 +30,7 @@ const SingleEvent = () => {
     axios(config)
       .then(function (response) {
         for (const attendee of response.data.attendees) {
-          if (attendee.isAdmin && attendee.user === user._id) {
+          if (attendee.isAdmin && attendee.user._id === user._id) {
             response.data.event.isAdmin = true;
           }
         }
@@ -63,7 +63,7 @@ const SingleEvent = () => {
   if (!eventData) return <CircularProgress color="secondary" />;
 
   return (
-    <div>
+    <div className="single-event">
       <Informations eventData={eventData} />
       <Attendees eventData={eventData} deleteAttendee={deleteAttendee} />
       <Stage eventData={eventData} />
