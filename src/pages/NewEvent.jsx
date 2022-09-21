@@ -1,13 +1,10 @@
-import { Box, Button, InputLabel, TextField } from "@mui/material";
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Form from "../components/Form";
 import { AuthContext } from "../contexts/AuthContext";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
-
+import StepOne from "../components/Events/NewEvent/StepOne";
+import StepTwo from "../components/Events/NewEvent/StepTwo";
+import StepThree from "../components/Events/NewEvent/StepThree";
 
 const NewEvent = () => {
   const initialEventState = {
@@ -46,123 +43,39 @@ const NewEvent = () => {
       });
   }
 
-  const firstStepFields = [
-    { id: "name", fieldName: "Name" },
-    {
-      id: "description",
-      fieldName: "Description",
-      placeholder: "250 characters max",
-    },
-    { id: "durationInHours", fieldName: "Duration" },
-    { id: "locationSuggestions", fieldName: "LocationSuggestions" },
-  ];
+  return (
+    <div>
+      <h2>NEW EVENT</h2>
+      {step === 0 && (
+        <StepOne
+          event={event}
+          setEvent={setEvent}
+          setStep={setStep}
+          step={step}
+          initialEventState={initialEventState}
+        />
+      )}
 
-  const thirdStepFields = [
-    {
-      id: "informationGatheringDeadline",
-      fieldName: "informationGatheringDeadline",
-      type: "date",
-    },
-    {
-      id: "votingStageDeadline",
-      fieldName: "votingStageDeadline",
-      type: "date",
-    },
-  ];
-  if (step === 0)
-    return (
-      <div className="NewEvent">
-        <h2>NEW EVENT</h2>
-        <Form
-          submitField="Create"
-          fields={firstStepFields}
-          formData={event}
-          setFormData={setEvent}
-          initialFormDataState={initialEventState}
+      {step === 1 && (
+        <StepTwo
+          setEvent={setEvent}
+          event={event}
+          setStep={setStep}
+          step={step}
         />
-        <div>
-          <Link to="/events">
-            <Button
-              variant="outlined"
-              color="success"
-              onClick={(e) => setStep(step - 1)}
-            >
-              Back
-            </Button>
-          </Link>
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={(e) => setStep(step + 1)}
-          >
-            Next Step
-          </Button>
-        </div>
-      </div>
-    );
-  else if (step === 1)
-    return (
-      <div className="NewEvent">
-        <h2>NEW EVENT</h2>
-        <InputLabel htmlFor={event.dateSuggestion}>Time Range</InputLabel>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <StaticDateRangePicker
-            displayStaticWrapperAs="desktop"
-            value={event.dateSuggestion}
-            onChange={(newValue) => {
-              setEvent({ ...event, dateSuggestion: newValue });
-            }}
-            renderInput={(startProps, endProps) => (
-              <React.Fragment>
-                <TextField {...startProps} />
-                <Box sx={{ mx: 2 }}> to </Box>
-                <TextField {...endProps} />
-              </React.Fragment>
-            )}
-          />
-        </LocalizationProvider>
-        <div>
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={(e) => setStep(step - 1)}
-          >
-            Back
-          </Button>
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={(e) => setStep(step + 1)}
-          >
-            Next Step
-          </Button>
-        </div>
-      </div>
-    );
-  else if (step === 2)
-    return (
-      <div className="NewEvent">
-        <h2>NEW EVENT</h2>
-        <Form
-          submitField="Create"
-          fields={thirdStepFields}
-          formData={event}
-          setFormData={setEvent}
-          initialFormDataState={initialEventState}
-          submitFunc={createEvent}
-          isSubmit={true}
+      )}
+      {step === 2 && (
+        <StepThree
+          setEvent={setEvent}
+          event={event}
+          setStep={setStep}
+          step={step}
+          initialEventState={initialEventState}
+          createEvent={createEvent}
         />
-        <div>
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={(e) => setStep(step - 1)}
-          >
-            Back
-          </Button>
-        </div>
-      </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default NewEvent;
