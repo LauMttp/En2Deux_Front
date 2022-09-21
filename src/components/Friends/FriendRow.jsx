@@ -2,7 +2,6 @@ import {Button, ListItemAvatar, ListItemButton, ListItemText } from '@mui/materi
 import React, { useContext } from 'react'
 import UserAvatar from '../UserAvatar'
 import './FriendRow.css'
-// import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -10,7 +9,6 @@ const FriendRow = ({friend, getFriends, friendshipId}) => {
     
     const {token} = useContext(AuthContext);
 
-    console.log(friend._id)
     const handleDelete = () => {
         const config = {
             method: 'delete',
