@@ -3,13 +3,18 @@ import FriendRow from './FriendRow'
 import './AllFriends.css'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import { Button } from '@mui/material';
 
 
 const AllFriends = ({friends, user, getFriends}) => {
+  
+  const handleAdd = () => {
+    
+  }
 
   return (
     <div className='AllFriends'>
-        <h2> Friends </h2>
+        <h2> Friends  </h2>
           <ul>
             {
               friends.length === 0 ?
@@ -27,7 +32,8 @@ const AllFriends = ({friends, user, getFriends}) => {
                         friend.requestor._id === user._id  ?
                         ( <FriendRow friendshipId={friend._id} friend={friend.requested} getFriends={getFriends}/>
                         ):(
-                          <FriendRow friendshipId={friend._id} friend={friend.requestor} getFriends={getFriends}/>)
+                          <FriendRow friendshipId={friend._id} friend={friend.requestor} getFriends={getFriends}/>
+                        )
 
                       }
                     </ListItem>
