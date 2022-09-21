@@ -8,30 +8,6 @@ import { AuthContext } from '../../contexts/AuthContext'
 const FriendInvitationRow = ({invitationId, requestor, getFriends}) => {
     const {token} = useContext(AuthContext);
     const baseUrl = "http://localhost:5005";
-    // const handleAccept = () => {
-    //     const data = JSON.stringify({
-    //         "answer": "yes"
-    //       });
-
-    //     const config = {
-    //     method: 'patch',
-    //     url: `${baseUrl}/api/friend/${invitationId}`,
-    //     headers: { 
-    //         'Authorization': `Bearer ${token}`,
-    //         'Content-Type': 'application/json'
-    //     },
-    //     data : data
-    //     };
-
-    //     axios(config)
-    //     .then(function (response) {
-    //     console.log(JSON.stringify(response.data));
-    //     getFriends();
-    //     })
-    //     .catch(function (error) {
-    //     console.log(error);
-    //     });
-    // }
 
     const handleResponse = (string) => {
  
@@ -60,9 +36,6 @@ const FriendInvitationRow = ({invitationId, requestor, getFriends}) => {
 
         
     }
-    // const handleDecline = () => {
-
-    // }
 
   return (
     <div className='FriendInvitationRow'>

@@ -4,7 +4,7 @@ import Form from "../components/Form";
 import { Box } from "@mui/system";
 import UserAvatar from "../components/UserAvatar";
 import { AuthContext } from "../contexts/AuthContext";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 const Profile = () => {
   const { token, user, setUser, logout } = useContext(AuthContext);
@@ -87,12 +87,12 @@ const Profile = () => {
     },
   ];
 
-  if (!user) return <p>Loading...</p>;
+  if (!user) return <CircularProgress color="secondary" />;
 
   return (
     <div className="Profile">
       <h2>PROFILE</h2>
-      <Box>
+      <Box sx={{ "& button": { m: 1 } }}>
         <UserAvatar initial={user.name.charAt(0) + user.surname.charAt(0)} />
 
         <Form

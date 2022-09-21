@@ -1,6 +1,6 @@
 import React from "react";
 import Inputs from "./Inputs";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 const Form = ({
   submitField,
@@ -16,7 +16,7 @@ const Form = ({
     submitFunc();
     setFormData(initialFormDataState);
   }
-  if (!formData) return <p>Loading...</p>;
+  if (!formData) return <CircularProgress color="secondary" />;
   return (
     <div className="Form">
       <form onSubmit={handleSubmit}>

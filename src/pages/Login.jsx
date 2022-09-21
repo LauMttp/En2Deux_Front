@@ -3,6 +3,7 @@ import Form from "../components/Form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import { Box } from "@mui/material";
 
 const Login = () => {
   const { setToken } = useContext(AuthContext);
@@ -44,7 +45,7 @@ const Login = () => {
     { type: "password", id: "password", fieldName: "Password" },
   ];
   return (
-    <div className="Login">
+    <Box className="Login">
       <h2>LOGIN</h2>
       <Form
         submitField="Log In"
@@ -55,7 +56,7 @@ const Login = () => {
         submitFunc={logIn}
         isSubmit={true}
       />
-    </div>
+    </Box>
   );
 };
 
