@@ -6,8 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Events = () => {
   const { token } = useContext(AuthContext);
-  const [events, setEvents] = useState([]);
-  const [invitations, setInvitations] = useState([]);
+  const [attendances, setAttendances] = useState([]);
 
   const baseUrl = "http://localhost:5005";
 
@@ -22,24 +21,7 @@ const Events = () => {
 
     axios(config)
       .then(function (response) {
-        setEvents(response.data);
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    const config2 = {
-      method: "get",
-      url: `${baseUrl}/api/event/invitations`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    axios(config2)
-      .then(function (response) {
-        setInvitations(response.data);
+        setAttendances(response.data);
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
@@ -52,9 +34,14 @@ const Events = () => {
   return (
     <div>
       <h2>Events</h2>
+      <Link to="/newevent">
+        <Button variant="contained" color="success">
+          Create new event
+        </Button>
+      </Link>
       <div>
         <ul>
-          {events.length === 0 ? (
+          {attendances.length === 0 ? (
             <>
               <li>
                 Your don't have events yet.
@@ -63,31 +50,22 @@ const Events = () => {
               </li>
             </>
           ) : (
-            events.map((event) => {
-              return <li key={event._id}>{event.event.name}</li>;
+            attendances.map((attendance) => {
+              console.log(attendance);
+              return (
+                <div key={attendance.event._id}>
+                  <h4>{attendance.event.name}</h4>
+                  <Link to={`/events/${attendance.event._id}`}>
+                    <Button variant="outlined" color="success" size="small">
+                      View event{" "}
+                    </Button>
+                  </Link>
+                </div>
+              );
             })
           )}
         </ul>
       </div>
-      <h2>Invitations</h2>
-      <div>
-        <ul>
-          {invitations.length === 0 ? (
-            <>
-              <li>Your don't have invitations yet.</li>
-            </>
-          ) : (
-            invitations.map((invitation) => {
-              return <li key={invitation._id}>{invitation.event.name}</li>;
-            })
-          )}
-        </ul>
-      </div>
-      <Link to="/newevent">
-        <Button variant="contained" color="success">
-          Create new event
-        </Button>
-      </Link>
     </div>
   );
 };

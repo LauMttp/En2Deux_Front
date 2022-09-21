@@ -9,8 +9,8 @@ import Events from "./pages/Events";
 import Invitations from "./pages/Invitations";
 import Friends from "./pages/Friends";
 import Profile from "./pages/Profile";
-import { create } from "@mui/material/styles/createTransitions";
 import Layout from "./pages/Layout";
+import SingleEvent from "./pages/SingleEvent";
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           <Route path="newevent" element={<NewEvent />} />
 
           <Route path="events" element={<Events />} />
+          <Route path="events/:eventId" element={<SingleEvent />} />
           <Route path="invitations" element={<Invitations />} />
 
           {/* Insert friendship invitations inside friends route */}

@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
-import dayjs from "dayjs";
+
 
 const NewEvent = () => {
   const initialEventState = {
@@ -39,11 +39,11 @@ const NewEvent = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        navigate(`/events/${response.data.eventCreated._id}`);
       })
       .catch(function (error) {
         console.log(error);
       });
-    navigate("/events");
   }
 
   const firstStepFields = [
@@ -56,11 +56,6 @@ const NewEvent = () => {
     { id: "durationInHours", fieldName: "Duration" },
     { id: "locationSuggestions", fieldName: "LocationSuggestions" },
   ];
-
-  // const secondStepFields = [
-  //   { id: "dateSuggestion", fieldName: "Time Range", type: "date" },
-  //   { id: "durationInHours", fieldName: "Duration" },
-  // ];
 
   const thirdStepFields = [
     {

@@ -92,7 +92,7 @@ const Profile = () => {
   return (
     <div className="Profile">
       <h2>PROFILE</h2>
-      <Box>
+      <Box sx={{ "& button": { m: 1 } }}>
         <UserAvatar initial={user.name.charAt(0) + user.surname.charAt(0)} />
 
         <Form

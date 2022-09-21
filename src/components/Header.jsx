@@ -20,6 +20,9 @@ const Header = () => {
           <Link to="/events">
             <Button variant="outlined">Events</Button>
           </Link>
+          <Link to="/invitations">
+            <Button variant="outlined">Invitations</Button>
+          </Link>
           <Link to="/friends">
             <Button variant="outlined">friends</Button>
           </Link>
