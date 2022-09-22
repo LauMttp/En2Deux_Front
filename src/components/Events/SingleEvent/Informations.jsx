@@ -6,38 +6,36 @@ import "./Informations.css";
 
 const Informations = ({ eventData }) => {
   return (
-    <Box>
-      <Box className="admin-box">
-        <h1>{eventData.event.name}</h1>
-        <p>
-          Created by : {eventData.event.author.name}{" "}
-          {eventData.event.author.surname}{" "}
-        </p>
-        <h4>Administrators</h4>
-        {eventData.attendees.map((attendee) =>
-          attendee.isAdmin ? (
-            <>
-              <ListItemButton>
-                <ListItemAvatar>
-                  <UserAvatar
-                    initial={
-                      attendee.user.name.charAt(0) +
-                      attendee.user.surname.charAt(0)
-                    }
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  id={attendee.user._id}
-                  primary={`${attendee.user.name} ${attendee.user.surname}`}
-                  secondary={attendee.user.username}
+    <Box className="admin-box">
+      <h1>{eventData.event.name}</h1>
+      <p>
+        Created by : {eventData.event.author.name}{" "}
+        {eventData.event.author.surname}{" "}
+      </p>
+      <h4>Administrators</h4>
+      {eventData.attendees.map((attendee) =>
+        attendee.isAdmin ? (
+          <>
+            <ListItemButton>
+              <ListItemAvatar>
+                <UserAvatar
+                  initial={
+                    attendee.user.name.charAt(0) +
+                    attendee.user.surname.charAt(0)
+                  }
                 />
-              </ListItemButton>
-            </>
-          ) : null
-        )}
-        <p>Description :{eventData.event.description}</p>
-        <p>Duration:{eventData.event.durationInHours / 24} days</p>
-      </Box>
+              </ListItemAvatar>
+              <ListItemText
+                id={attendee.user._id}
+                primary={`${attendee.user.name} ${attendee.user.surname}`}
+                secondary={attendee.user.username}
+              />
+            </ListItemButton>
+          </>
+        ) : null
+      )}
+      <p>Description :{eventData.event.description}</p>
+      <p>Duration:{eventData.event.durationInHours / 24} days</p>
     </Box>
   );
 };
