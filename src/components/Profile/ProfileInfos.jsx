@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 
 const ProfileInfos = ({ tempUser }) => {
+  if (!tempUser) return <div>Loading</div>;
   return (
     <Box className="ProfileInfos">
       <p>Username : {tempUser.username}</p>

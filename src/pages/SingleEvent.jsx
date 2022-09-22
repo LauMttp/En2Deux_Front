@@ -56,6 +56,7 @@ const SingleEvent = () => {
       });
   }, [token, user]);
 
+  // -----------------------------> MOVE TO SINGLE EVENT/ATTENDEE.JSX DOC
   const deleteAttendee = (attendeeId) => {
     const config = {
       method: "delete",
@@ -73,10 +74,7 @@ const SingleEvent = () => {
         console.log(error);
       });
   };
-
-  const handleSubmit = () => {
-    console.log("FUNCTION TO BE CREATED ---> AXIOS PATCH ATTTENDEEE");
-  };
+  // -----------------------------> MOVE TO SINGLE EVENT/ATTENDEE.JSX DOC
 
   const deleteEvent = () => {
     var config = {
@@ -123,16 +121,20 @@ const SingleEvent = () => {
           </Button>
         </Box>
       )}
-      <Attendees eventData={eventData} deleteAttendee={deleteAttendee} />
+
       <Stage
         isEditable={isEditable}
+        eventId={eventId}
+        setEventData={setEventData}
         setisEditable={setisEditable}
         eventData={eventData}
-        handleSubmit={handleSubmit}
         currentAttendeeId={currentAttendeeId}
         setAttendeeInformations={setAttendeeInformations}
         attendeeInformations={attendeeInformations}
       />
+
+      <Attendees eventData={eventData} deleteAttendee={deleteAttendee} />
+
       {eventData.event.author._id === user._id && (
         <Button variant="contained" color="error" onClick={deleteEvent}>
           Delete this event

@@ -36,7 +36,8 @@ const EditableInformations = ({
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        setEventData({ ...eventData, event: response.data });
+        setEventData({ ...eventData, event: {...response.data, isAdmin : true} });
+
         setisEditable((current) => !current);
       })
       .catch(function (error) {
