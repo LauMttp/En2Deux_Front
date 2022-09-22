@@ -9,7 +9,7 @@ const Invitations = () => {
   const { token } = useContext(AuthContext);
   const [invitations, setInvitations] = useState([]);
 
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   useEffect(() => {
     const config = {

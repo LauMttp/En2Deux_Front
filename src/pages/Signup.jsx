@@ -13,7 +13,7 @@ const Signup = () => {
 
   const [user, setUser] = useState(initialUserState);
 
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   function createUser() {
     const config = {

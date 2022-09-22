@@ -23,7 +23,7 @@ function SearchBar({ relationStatus, checkRelation }) {
   useEffect(() => {
     const config = {
       method: "get",
-      url: "https://en2deux.netlify.app/api/user/all",
+      url: "https://endeuxdeux.herokuapp.com/api/user/all",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,7 +44,7 @@ function SearchBar({ relationStatus, checkRelation }) {
   const handleSearch = () => {
     const config = {
       method: "get",
-      url: `https://en2deux.netlify.app/api/user/${searchQuery}`,
+      url: `https://endeuxdeux.herokuapp.com/api/user/${searchQuery}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -65,7 +65,7 @@ function SearchBar({ relationStatus, checkRelation }) {
   const handleAdd = (searchedUser) => {
     const config = {
       method: "post",
-      url: `https://en2deux.netlify.app/api/friend/${searchedUser[0]._id}`,
+      url: `https://endeuxdeux.herokuapp.com/api/friend/${searchedUser[0]._id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

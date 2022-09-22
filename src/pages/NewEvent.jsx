@@ -16,7 +16,7 @@ const NewEvent = () => {
     informationGatheringDeadline: "",
     votingStageDeadline: "",
   };
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [event, setEvent] = useState(initialEventState);

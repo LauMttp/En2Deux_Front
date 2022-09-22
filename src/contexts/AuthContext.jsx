@@ -22,7 +22,7 @@ const AuthContextWrapper = ({ children }) => {
 
   const authenticateUser = () => {
     axios
-      .get("https://en2deux.netlify.app/api/user", {
+      .get("https://endeuxdeux.herokuapp.com/api/user", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

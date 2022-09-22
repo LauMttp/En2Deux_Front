@@ -15,7 +15,7 @@ const Profile = () => {
     if (token) {
       const config = {
         method: "get",
-        url: "https://en2deux.netlify.app/api/user/",
+        url: "https://endeuxdeux.herokuapp.com/api/user/",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,7 +32,7 @@ const Profile = () => {
     }
   }, [token]);
 
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   //DEL USER ACCOUNT
   function deleteUser() {

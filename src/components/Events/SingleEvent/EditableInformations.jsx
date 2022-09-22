@@ -20,7 +20,7 @@ const EditableInformations = ({
     description: eventData.event.description,
     durationInHours: eventData.event.durationInHours,
   });
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   const updateEvent = () => {
     const config = {

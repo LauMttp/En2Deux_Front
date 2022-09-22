@@ -19,7 +19,7 @@ const Login = () => {
   const logIn = (event) => {
     const config = {
       method: "post",
-      baseURL: "https://en2deux.netlify.app",
+      baseURL: "https://endeuxdeux.herokuapp.com",
       url: "/api/auth/login",
       headers: {
         "Content-Type": "application/json",

@@ -7,7 +7,7 @@ import VotingStage from "./Stages/VotingStage";
 
 const Stage = ({ eventData, eventId, setEventData, currentAttendeeId }) => {
   const { token } = useContext(AuthContext);
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
   const [newStage, setNewStage] = useState({
     stage: eventData.event.stage,
   });

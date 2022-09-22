@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: "https://en2deux.netlify.app/api",
+  baseURL: "https://endeuxdeux.herokuapp.com/api",
   withCredentials: true,
 });
 

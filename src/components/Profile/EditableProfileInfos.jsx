@@ -6,7 +6,7 @@ import Form from "../Form";
 
 const EditableProfileInfos = ({ tempUser, setTempUser, setisEditable }) => {
   const { token, setUser } = useContext(AuthContext);
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   const fields = [
     { id: "username", fieldName: "Username" },

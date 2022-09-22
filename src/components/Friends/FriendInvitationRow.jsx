@@ -12,7 +12,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const FriendInvitationRow = ({ invitationId, requestor, getFriends }) => {
   const { token } = useContext(AuthContext);
-  const baseUrl = "https://en2deux.netlify.app";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   const handleResponse = (string) => {
     const data = JSON.stringify({

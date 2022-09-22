@@ -16,7 +16,7 @@ const Friends = () => {
     //get all friends list
     const config = {
       method: "get",
-      url: "https://en2deux.netlify.app/api/friend/",
+      url: "https://endeuxdeux.herokuapp.com/api/friend/",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,7 +44,7 @@ const Friends = () => {
   const checkFriendship = (username) => {
     const config = {
       method: "get",
-      url: `https://en2deux.netlify.app/api/friend/search?username=${username}`,
+      url: `https://endeuxdeux.herokuapp.com/api/friend/search?username=${username}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,7 +76,7 @@ const Friends = () => {
   const handleAdd = (searchedUser) => {
     const config = {
       method: "post",
-      url: `https://en2deux.netlify.app/api/friend/${searchedUser[0]._id}`,
+      url: `https://endeuxdeux.herokuapp.com/api/friend/${searchedUser[0]._id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
