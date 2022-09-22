@@ -19,7 +19,7 @@ const Login = () => {
   const logIn = (event) => {
     const config = {
       method: "post",
-      baseURL: "http://localhost:5005",
+      baseURL: "https://en2deux.netlify.app",
       url: "/api/auth/login",
       headers: {
         "Content-Type": "application/json",

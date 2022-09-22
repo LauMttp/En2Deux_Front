@@ -15,7 +15,7 @@ const Profile = () => {
     if (token) {
       const config = {
         method: "get",
-        url: "http://localhost:5005/api/user/",
+        url: "https://en2deux.netlify.app/api/user/",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,7 +32,7 @@ const Profile = () => {
     }
   }, [token]);
 
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://en2deux.netlify.app";
 
   //DEL USER ACCOUNT
   function deleteUser() {

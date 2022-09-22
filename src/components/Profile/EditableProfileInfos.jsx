@@ -6,7 +6,7 @@ import Form from "../Form";
 
 const EditableProfileInfos = ({ tempUser, setTempUser, setisEditable }) => {
   const { token, setUser } = useContext(AuthContext);
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://en2deux.netlify.app";
 
   const fields = [
     { id: "username", fieldName: "Username" },

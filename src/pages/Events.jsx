@@ -9,7 +9,7 @@ const Events = () => {
   const [adminAttendances, setAdminAttendances] = useState([]);
   const [notAdminAttendances, setNotAdminAttendances] = useState([]);
 
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://en2deux.netlify.app";
 
   useEffect(() => {
     const config = {
