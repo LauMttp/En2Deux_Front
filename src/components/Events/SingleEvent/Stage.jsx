@@ -5,13 +5,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import InformationGathering from "./Stages/InformationGathering";
 import VotingStage from "./Stages/VotingStage";
 
-const Stage = ({
-  eventData,
-  eventId,
-  setEventData,
-  setAttendeeInformations,
-  attendeeInformations,
-}) => {
+const Stage = ({ eventData, eventId, setEventData, currentAttendeeId }) => {
   const { token } = useContext(AuthContext);
   const baseUrl = "http://localhost:5005";
   const [newStage, setNewStage] = useState({
@@ -49,7 +43,10 @@ const Stage = ({
       .then(function (response) {
         console.log("Event updated ", response.data);
         setEventData((prevState) => {
-          return {...prevState, event: {...prevState.event, stage: response.data.stage}}
+          return {
+            ...prevState,
+            event: { ...prevState.event, stage: response.data.stage },
+          };
         });
       })
       .catch(function (error) {
@@ -71,8 +68,7 @@ const Stage = ({
       {eventData.event.stage === "Information gathering" && (
         <InformationGathering
           eventData={eventData}
-          setAttendeeInformations={setAttendeeInformations}
-          attendeeInformations={attendeeInformations}
+          currentAttendeeId={currentAttendeeId}
         />
       )}
 

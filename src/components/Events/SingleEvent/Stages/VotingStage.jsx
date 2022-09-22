@@ -9,7 +9,7 @@ const VotingStage = ({ eventData }) => {
           Deadline to vote for the best options :{" "}
           {eventData.event.votingStageDeadline}
         </p>
-        <p>Options to be displayed</p>
+        <p>Tiiiimeeee to Vote !!!! Options to be displayed</p>
       </div>
     </Box>
   );

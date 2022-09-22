@@ -16,11 +16,6 @@ const SingleEvent = () => {
   const [isEditable, setisEditable] = useState(false);
   const [eventData, setEventData] = useState("");
   const [currentAttendeeId, setCurrentAttendeeId] = useState("");
-  const [attendeeInformations, setAttendeeInformations] = useState({
-    availabilities: "",
-    budget: 50,
-    location: "",
-  });
 
   const baseUrl = "http://localhost:5005";
 
@@ -41,7 +36,7 @@ const SingleEvent = () => {
       .then(function (response) {
         for (const attendee of response.data.attendees) {
           if (attendee.user._id === user._id) {
-            setCurrentAttendeeId(attendee.user._id);
+            setCurrentAttendeeId(attendee._id);
             console.log(attendee.user._id);
             if (attendee.isAdmin) {
               response.data.event.isAdmin = true;
@@ -129,8 +124,6 @@ const SingleEvent = () => {
         setisEditable={setisEditable}
         eventData={eventData}
         currentAttendeeId={currentAttendeeId}
-        setAttendeeInformations={setAttendeeInformations}
-        attendeeInformations={attendeeInformations}
       />
 
       <Attendees eventData={eventData} deleteAttendee={deleteAttendee} />
