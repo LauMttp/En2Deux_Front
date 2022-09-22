@@ -1,5 +1,5 @@
 import { Button, InputLabel } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from "../../Form";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -13,8 +13,7 @@ const StepOne = ({ event, setEvent, setStep, step, initialEventState }) => {
       fieldName: "Description",
       placeholder: "250 characters max",
     },
-    { id: "durationInHours", fieldName: "Duration" },
-    { id: "locationSuggestions", fieldName: "LocationSuggestions" },
+    { id: "durationInHours", fieldName: "Duration (in hours)", type: "number" },
   ];
   const top100cities = [
     "Paris",
@@ -62,9 +61,10 @@ const StepOne = ({ event, setEvent, setStep, step, initialEventState }) => {
         getOptionLabel={(option) => option}
         defaultValue={[top100cities[0]]}
         filterSelectedOptions
-        // onChange={(value) => {
-        //   setEvent({ ...event, locationSuggestions: value });
-        // }}
+        value={event.locationSuggestions}
+        onChange={(_, value) => {
+          setEvent({ ...event, locationSuggestions: value });
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
