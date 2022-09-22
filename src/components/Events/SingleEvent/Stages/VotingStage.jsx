@@ -1,10 +1,9 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box } from "@mui/material";
+import React from "react";
 
-const VotingStage = ({eventData}) => {
+const VotingStage = ({ eventData }) => {
   return (
     <Box className="Voting">
-    {eventData.event.stage === "Voting stage" && (
       <div>
         <p>
           Deadline to vote for the best options :{" "}
@@ -12,9 +11,8 @@ const VotingStage = ({eventData}) => {
         </p>
         <p>Options to be displayed</p>
       </div>
-    )}
-  </Box>
-  )
-}
+    </Box>
+  );
+};
 
-export default VotingStage
+export default VotingStage;
