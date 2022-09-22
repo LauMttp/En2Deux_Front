@@ -15,7 +15,7 @@ import { AuthContext } from "../../../../contexts/AuthContext";
 
 const InformationGathering = ({ eventData, currentAttendeeId }) => {
   const { token } = useContext(AuthContext);
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
   const [attendeeInformations, setAttendeeInformations] = useState({
     availabilities: "",
     budget: 50,

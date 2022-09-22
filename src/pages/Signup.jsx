@@ -13,7 +13,7 @@ const Signup = () => {
 
   const [user, setUser] = useState(initialUserState);
 
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   function createUser() {
     const config = {
