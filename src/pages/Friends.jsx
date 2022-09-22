@@ -4,7 +4,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import AllFriendInvitations from "../components/Friends/AllFriendInvitations";
 import AllFriends from "../components/Friends/AllFriends";
 import SearchBar from "../components/SearchBar";
-import { List } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 
 
@@ -28,24 +27,9 @@ const Friends = () => {
     
     axios(config)
     .then(function (response) {
-        setFriends(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
-    //get all invitations list
-    const config2 = {
-      method: 'get',
-      url: 'http://localhost:5005/api/friend/invitations',
-      headers: { 
-        'Authorization': `Bearer ${token}`
-      }
-    };
-    
-    axios(config2)
-    .then(function (response) {
-      setInvitations(response.data);
+      console.log(response.data[0].friendRequests)
+      setFriends(response.data[0].friends);
+      setInvitations(response.data[0].friendRequests)
     })
     .catch(function (error) {
       console.log(error);
