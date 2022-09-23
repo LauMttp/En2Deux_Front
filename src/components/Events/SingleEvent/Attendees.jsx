@@ -38,7 +38,7 @@ const Attendees = ({ eventData, deleteAttendee }) => {
 
     const config = {
       method: "post",
-      url: `http://localhost:5005/api/attendee/${eventData.event._id}/${searchedUser._id}`,
+      url: `https://endeuxdeux.herokuapp.com/api/attendee/${eventData.event._id}/${searchedUser._id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

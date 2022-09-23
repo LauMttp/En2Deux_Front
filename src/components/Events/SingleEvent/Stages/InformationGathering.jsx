@@ -20,6 +20,7 @@ const InformationGathering = ({ eventData, currentAttendeeId }) => {
     availabilities: [],
     budget: 50,
     location: "",
+    hasAnswered: true,
   });
 
   const submitAttendeeInfos = (e) => {
@@ -44,12 +45,13 @@ const InformationGathering = ({ eventData, currentAttendeeId }) => {
       });
   };
 
-  console.log(attendeeInformations.availabilities);
-
   return (
     <Box className="Gathering">
-      Deadline to fill your informations :{" "}
-      {eventData.event.informationGatheringDeadline}
+      <p>
+        Deadline to fill your informations :
+        {eventData.event.informationGatheringDeadline}
+      </p>
+      {/* {hasAnswered ? ( */}
       <form onSubmit={submitAttendeeInfos}>
         <InputLabel htmlFor={attendeeInformations.availabilities}>
           Your availabilities
@@ -113,6 +115,9 @@ const InformationGathering = ({ eventData, currentAttendeeId }) => {
           Submit
         </Button>
       </form>
+      {/* ) : (
+        <p>coucou</p>
+      )} */}
     </Box>
   );
 };

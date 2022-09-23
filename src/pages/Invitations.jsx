@@ -28,7 +28,7 @@ const Invitations = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [token]);
+  }, []);
 
   const handleResponse = (invitationId, string) => {
     const data = JSON.stringify({
@@ -56,49 +56,50 @@ const Invitations = () => {
   if (!token) return <CircularProgress color="secondary" />;
 
   return (
-    <div className="Main">
-    <div className="invitationsheader">
-    <h2>INVITATIONS</h2>
-    </div>
- 
-      <ul>
-        {invitations.length === 0 ? (
-          <>
-            <li>Your don't have invitations yet ..</li>
-          </>
-        ) : (
-          invitations.map((invitation) => {
-            return (
-              <div className="Invitation" key={invitation.event._id}>
-                <h4>{invitation.event.name}</h4>
-                <Link to={`/events/${invitation.event._id}`}>
-                  <Button variant="outlined" color="success" size="small">
-                    View event{" "}
+    <div className="invit-Main">
+      <div className="invitationsheader">
+        <h2>INVITATIONS</h2>
+      </div>
+      <div className="invitationscontainer">
+        <ul>
+          {invitations.length === 0 ? (
+            <>
+              <li>Your don't have invitations yet ..</li>
+            </>
+          ) : (
+            invitations.map((invitation) => {
+              return (
+                <div className="Invitation" key={invitation.event._id}>
+                  <h4>{invitation.event.name}</h4>
+                  <Link to={`/events/${invitation.event._id}`}>
+                    <Button variant="outlined" color="success" size="small">
+                      View event{" "}
+                    </Button>
+                  </Link>
+                  <Button
+                    className="button"
+                    id="accepted"
+                    color="success"
+                    variant="contained"
+                    onClick={() => handleResponse(invitation._id, "yes")}
+                  >
+                    Accept
                   </Button>
-                </Link>
-                <Button
-                  className="button"
-                  id="accepted"
-                  color="success"
-                  variant="contained"
-                  onClick={() => handleResponse(invitation._id, "yes")}
-                >
-                  Accept
-                </Button>
-                <Button
-                  className="button"
-                  id="declined"
-                  color="error"
-                  variant="outlined"
-                  onClick={() => handleResponse(invitation._id, "no")}
-                >
-                  Decline
-                </Button>
-              </div>
-            );
-          })
-        )}
-      </ul>
+                  <Button
+                    className="button"
+                    id="declined"
+                    color="error"
+                    variant="outlined"
+                    onClick={() => handleResponse(invitation._id, "no")}
+                  >
+                    Decline
+                  </Button>
+                </div>
+              );
+            })
+          )}
+        </ul>
+      </div>
     </div>
   );
 };
