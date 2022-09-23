@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import InformationGathering from "./Stages/InformationGathering";
 import VotingStage from "./Stages/VotingStage";
+import "./Stage.css";
 
 const Stage = ({ eventData, eventId, setEventData, currentAttendeeId }) => {
   const { token } = useContext(AuthContext);
@@ -55,8 +56,8 @@ const Stage = ({ eventData, eventId, setEventData, currentAttendeeId }) => {
   };
 
   return (
-    <div>
-      <div className="StageHeader">
+    <div className="StageHeader">
+      <div>
         <h2>Stage : {eventData.event.stage}</h2>
         {eventData.event.isAdmin && (
           <Button color="success" size="small" onClick={closeCurrentStage}>

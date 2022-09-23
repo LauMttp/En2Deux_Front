@@ -60,33 +60,35 @@ const Profile = () => {
 
   return (
     <div className="Profile">
-      <h2>PROFILE</h2>
-
-      <UserAvatar initial={user.name.charAt(0) + user.surname.charAt(0)} />
-
-      {isEditable ? (
-        <EditableProfileInfos
-          setisEditable={setisEditable}
-          tempUser={tempUser}
-          setTempUser={setTempUser}
-        />
-      ) : (
-        <ProfileInfos tempUser={tempUser} />
-      )}
-
-      <Button
-        size="small"
-        color="success"
-        onClick={(e) => {
-          setisEditable((current) => !current);
-        }}
-      >
-        {isEditable ? "Cancel" : "Edit"}
-      </Button>
-
-      <Button variant="contained" color="error" onClick={deleteUser}>
-        Delete my account
-      </Button>
+      <div className="profilehaeder">
+        <h2>PROFILE</h2>
+        <Button size="small" color="error" onClick={deleteUser}>
+          Delete my account
+        </Button>
+      </div>
+      <div className="infos">
+        {isEditable ? (
+          <EditableProfileInfos
+            setisEditable={setisEditable}
+            tempUser={tempUser}
+            setTempUser={setTempUser}
+          />
+        ) : (
+          <ProfileInfos tempUser={tempUser} />
+        )}
+        <div className="buttonsbox">
+          <UserAvatar initial={user.name.charAt(0) + user.surname.charAt(0)} />
+          <Button
+            size="small"
+            color="success"
+            onClick={(e) => {
+              setisEditable((current) => !current);
+            }}
+          >
+            {isEditable ? "Cancel" : "Edit"}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

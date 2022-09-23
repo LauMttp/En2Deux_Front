@@ -1,9 +1,4 @@
-.attendee span {
-  color: grey;
-  font-size: 12px;
-}
-
-.attendee-box {
+.StageHeader {
   width: 80vw;
   padding: 20px 20px 20px 40px;
   margin: 20px 0px;

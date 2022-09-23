@@ -12,7 +12,8 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import UserAvatar from "./UserAvatar";
 
-function SearchBar({ relationStatus, checkRelation }) {
+function SearchBar({ relationStatus, checkRelation, handleAdd, isAdmin }) {
+
   const initialSearchState = "Please select a user";
   const { token } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState([]);
@@ -23,7 +24,8 @@ function SearchBar({ relationStatus, checkRelation }) {
   useEffect(() => {
     const config = {
       method: "get",
-      url: "https://endeuxdeux.herokuapp.com/api/user/all",
+      url: "http://localhost:5005/api/user/all",
+
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,7 +46,9 @@ function SearchBar({ relationStatus, checkRelation }) {
   const handleSearch = () => {
     const config = {
       method: "get",
-      url: `https://endeuxdeux.herokuapp.com/api/user/${searchQuery}`,
+
+      url: `http://localhost:5005/api/user/${searchQuery}`,
+
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -55,25 +59,6 @@ function SearchBar({ relationStatus, checkRelation }) {
         console.log(JSON.stringify(response.data));
         setSearchedUser(response.data);
         checkRelation(response.data[0].username);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  //IF NO INVITE AND NO RELATION
-  const handleAdd = (searchedUser) => {
-    const config = {
-      method: "post",
-      url: `https://endeuxdeux.herokuapp.com/api/friend/${searchedUser[0]._id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -122,7 +107,7 @@ function SearchBar({ relationStatus, checkRelation }) {
               <Button
                 className="add-button"
                 variant="contained"
-                onClick={() => handleAdd(searchedUser)}
+                onClick={() => handleAdd(searchedUser[0])}
               >
                 Send Invite
               </Button>
