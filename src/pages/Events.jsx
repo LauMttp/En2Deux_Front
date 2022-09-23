@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import "./Events.css";
 
 const Events = () => {
   const { token } = useContext(AuthContext);
@@ -51,55 +52,60 @@ const Events = () => {
 
   return (
     <div>
-      <h2>Events</h2>
-      <Link to="/newevent">
-        <Button variant="contained" color="success">
-          Create new event
-        </Button>
-      </Link>
-      <div>
-        <h4>Administrated event</h4>
-        <ul>
-          {adminAttendances.length === 0 ? (
-            <>
-              <li>
-                Your don't have events yet ..
-                <br />
-                You can create one and invite your friends to participate!
-              </li>
-            </>
-          ) : (
-            adminAttendances.map((attendance) => {
-              console.log(attendance);
-              return (
-                <div key={attendance.event._id}>
-                  <h4>{attendance.event.name}</h4>
-                  <Link to={`/events/${attendance.event._id}`}>
-                    <Button variant="outlined" color="success" size="small">
-                      View event{" "}
-                    </Button>
-                  </Link>
-                </div>
-              );
-            })
-          )}
-        </ul>
+      <div className="eventheader">
+        <h2>EVENTS</h2>
+        <Link to="/newevent">
+          <Button variant="contained" color="success">
+            Create new event
+          </Button>
+        </Link>
       </div>
-      <div>
-        <h4>Not administrated event</h4>
-        {notAdminAttendances.map((attendance) => {
-          console.log(attendance);
-          return (
-            <div key={attendance.event._id}>
-              <h4>{attendance.event.name}</h4>
-              <Link to={`/events/${attendance.event._id}`}>
-                <Button variant="outlined" color="success" size="small">
-                  View event{" "}
-                </Button>
-              </Link>
-            </div>
-          );
-        })}
+      <div className="eventscontainer">
+        <div className="adminevents">
+          <h4>Administrated event</h4>
+          <ul>
+            {adminAttendances.length === 0 ? (
+              <>
+                <li>
+                  Your don't have events yet ..
+                  <br />
+                  You can create one and invite your friends to participate!
+                </li>
+              </>
+            ) : (
+              adminAttendances.map((attendance) => {
+                console.log(attendance);
+                return (
+                  <div key={attendance.event._id}>
+                    <h4>{attendance.event.name}</h4>
+                    <Link to={`/events/${attendance.event._id}`}>
+                      <Button variant="outlined" color="success" size="small">
+                        View event{" "}
+                      </Button>
+                    </Link>
+                  </div>
+                );
+              })
+            )}
+          </ul>
+        </div>
+
+        <div className="notadminevents">
+          <h4>Not administrated event</h4>
+          {notAdminAttendances.map((attendance) => {
+            console.log(attendance);
+            return (
+              <div key={attendance.event._id}>
+                <h4>{attendance.event.name}</h4>
+                <Link to={`/events/${attendance.event._id}`}>
+                  <Button variant="outlined" color="success" size="small">
+                    View event{" "}
+                  </Button>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

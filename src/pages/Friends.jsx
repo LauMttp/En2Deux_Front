@@ -95,16 +95,24 @@ const Friends = () => {
   if (!token) return <CircularProgress color="secondary" />;
 
   return (
-    <div className="Friends">
-      <h1>Your friends</h1>
-      <SearchBar
-        relationStatus={friendshipStatus}
-        setRelationStatus={setFriendshipStatus}
-        checkRelation={checkFriendship}
-        handleAdd={handleAdd}
-      />
-      <AllFriendInvitations invitations={invitations} getFriends={getFriends} />
-      <AllFriends friends={friends} user={user} getFriends={getFriends} />
+    <div className="friendscontainer">
+      <div className="friendheader">
+        <h1>FRIENDS</h1>
+
+        <SearchBar
+          relationStatus={friendshipStatus}
+          setRelationStatus={setFriendshipStatus}
+          checkRelation={checkFriendship}
+          handleAdd={handleAdd}
+        />
+      </div>
+      <div className="friendslist">
+        <AllFriends friends={friends} user={user} getFriends={getFriends} />
+        <AllFriendInvitations
+          invitations={invitations}
+          getFriends={getFriends}
+        />
+      </div>
     </div>
   );
 };

@@ -1,8 +1,33 @@
-.Friends {
+.friendscontainer {
+  margin: 2rem;
   min-height: 68vh;
-  width: 50vw;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.friendheader {
+  width: 80vw;
+  border: solid;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  -webkit-box-shadow: 5px 5px 5px 0px #000000,
+    22px 17px 20px 3px rgba(0, 0, 0, 0.18);
+  box-shadow: 5px 5px 5px 0px #000000, 22px 17px 20px 3px rgba(0, 0, 0, 0.18);
+  margin-bottom: 2rem;
+}
+
+.friendslist {
+  -webkit-box-shadow: 5px 5px 5px 0px #000000,
+    22px 17px 20px 3px rgba(0, 0, 0, 0.18);
+  box-shadow: 5px 5px 5px 0px #000000, 22px 17px 20px 3px rgba(0, 0, 0, 0.18);
+  border: solid;
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  min-height: 50vh;
+  justify-content: space-evenly;
 }

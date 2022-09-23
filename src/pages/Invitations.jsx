@@ -57,7 +57,10 @@ const Invitations = () => {
 
   return (
     <div className="Main">
-      <h2>Invitations</h2>
+    <div className="invitationsheader">
+    <h2>INVITATIONS</h2>
+    </div>
+ 
       <ul>
         {invitations.length === 0 ? (
           <>

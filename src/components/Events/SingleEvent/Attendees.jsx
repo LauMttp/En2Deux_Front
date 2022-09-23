@@ -5,6 +5,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import SearchBar from "../../SearchBar";
@@ -22,12 +23,36 @@ const Attendees = ({ eventData, deleteAttendee }) => {
           setAttendeeStatus(attendee.status);
         }
       }
-    } else {
-      setAttendeeStatus("add");
+      if (attendeeStatus === "") {
+        setAttendeeStatus("add");
+      }
     }
   };
 
-  const handleAdd = (searchedUser) => {};
+  const handleAdd = (searchedUser) => {
+    //To check
+    const qs = require("qs");
+    const data = qs.stringify({
+      isAdmin: "false",
+    });
+
+    const config = {
+      method: "post",
+      url: `http://localhost:5005/api/attendee/${eventData.event._id}/${searchedUser._id}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <Box className="attendee-box">
