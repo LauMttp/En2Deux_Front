@@ -9,15 +9,30 @@
   border: solid;
 }
 .invitationsheader {
-  min-width: 80vw;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
   border: solid;
+  min-width: 80vw;
   -webkit-box-shadow: 5px 5px 5px 0px #000000,
     22px 17px 20px 3px rgba(0, 0, 0, 0.18);
   box-shadow: 5px 5px 5px 0px #000000, 22px 17px 20px 3px rgba(0, 0, 0, 0.18);
 }
 
-.Main {
+.invitationscontainer {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    border: solid;
+    min-height: 50vh;
+    -webkit-box-shadow: 5px 5px 5px 0px #000000,
+      22px 17px 20px 3px rgba(0, 0, 0, 0.18);
+    box-shadow: 5px 5px 5px 0px #000000, 22px 17px 20px 3px rgba(0, 0, 0, 0.18);
+    margin-bottom: 2rem;
+}
+
+.invit-Main {
   min-height: 66vh;
-  border: solid;
 }

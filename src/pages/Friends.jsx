@@ -7,7 +7,6 @@ import SearchBar from "../components/SearchBar";
 import { CircularProgress } from "@mui/material";
 import "./Friends.css";
 
-
 const Friends = () => {
   const { token, user } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
@@ -18,7 +17,7 @@ const Friends = () => {
     //get all friends list
     const config = {
       method: "get",
-      url: "http://localhost:5005/api/friend/",
+      url: "https://endeuxdeux.herokuapp.com/api/friend/",
 
       headers: {
         Authorization: `Bearer ${token}`,
@@ -47,7 +46,7 @@ const Friends = () => {
   const checkFriendship = (username) => {
     const config = {
       method: "get",
-      url: `http://localhost:5005/api/friend/search?username=${username}`,
+      url: `https://endeuxdeux.herokuapp.com/api/friend/search?username=${username}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -79,7 +78,7 @@ const Friends = () => {
   const handleAdd = (searchedUser) => {
     const config = {
       method: "post",
-      url: `http://localhost:5005/api/friend/${searchedUser[0]._id}`,
+      url: `https://endeuxdeux.herokuapp.com/api/friend/${searchedUser._id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

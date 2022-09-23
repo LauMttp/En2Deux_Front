@@ -13,7 +13,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import UserAvatar from "./UserAvatar";
 
 function SearchBar({ relationStatus, checkRelation, handleAdd, isAdmin }) {
-
   const initialSearchState = "Please select a user";
   const { token } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState([]);
@@ -24,7 +23,7 @@ function SearchBar({ relationStatus, checkRelation, handleAdd, isAdmin }) {
   useEffect(() => {
     const config = {
       method: "get",
-      url: "http://localhost:5005/api/user/all",
+      url: "https://endeuxdeux.herokuapp.com/api/user/all",
 
       headers: {
         Authorization: `Bearer ${token}`,
@@ -47,7 +46,7 @@ function SearchBar({ relationStatus, checkRelation, handleAdd, isAdmin }) {
     const config = {
       method: "get",
 
-      url: `http://localhost:5005/api/user/${searchQuery}`,
+      url: `https://endeuxdeux.herokuapp.com/api/user/${searchQuery}`,
 
       headers: {
         Authorization: `Bearer ${token}`,
@@ -106,7 +105,8 @@ function SearchBar({ relationStatus, checkRelation, handleAdd, isAdmin }) {
             {relationStatus === "add" ? (
               <Button
                 className="add-button"
-                variant="contained"
+                color="success"
+                size="small"
                 onClick={() => handleAdd(searchedUser[0])}
               >
                 Send Invite
