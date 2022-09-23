@@ -8,4 +8,7 @@
   background-color: #f9eaff;
   padding: 20px 20px 20px 40px;
   margin: 20px 0px;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 15px -4px rgba(0, 0, 0, 0.51);
+  box-shadow: 5px 5px 15px -4px rgba(0, 0, 0, 0.51);
 }
