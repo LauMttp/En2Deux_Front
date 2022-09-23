@@ -20,7 +20,7 @@ const EditableInformations = ({
     description: eventData.event.description,
     durationInHours: eventData.event.durationInHours,
   });
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   const updateEvent = () => {
     const config = {
@@ -36,7 +36,10 @@ const EditableInformations = ({
     axios(config)
       .then(function (response) {
         console.log(response.data);
-        setEventData({ ...eventData, event: {...response.data, isAdmin : true} });
+        setEventData({
+          ...eventData,
+          event: { ...response.data, isAdmin: true },
+        });
 
         setisEditable((current) => !current);
       })

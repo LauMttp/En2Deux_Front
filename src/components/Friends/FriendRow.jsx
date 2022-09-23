@@ -18,7 +18,7 @@ const FriendRow = ({ friend, getFriends, friendshipId }) => {
   const handleDelete = () => {
     const config = {
       method: "delete",
-      url: `http://localhost:5005/api/friend/${friendshipId}`,
+      url: `https://endeuxdeux.herokuapp.com/api/friend/${friendshipId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

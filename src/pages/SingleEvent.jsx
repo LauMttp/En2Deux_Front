@@ -17,7 +17,7 @@ const SingleEvent = () => {
   const [eventData, setEventData] = useState("");
   const [currentAttendeeId, setCurrentAttendeeId] = useState("");
 
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   useEffect(() => {
     console.log(token, user);

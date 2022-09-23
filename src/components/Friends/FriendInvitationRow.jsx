@@ -12,7 +12,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const FriendInvitationRow = ({ invitationId, requestor, getFriends }) => {
   const { token } = useContext(AuthContext);
+
   const baseUrl = "http://localhost:5005";
+
 
   const handleResponse = (string) => {
     const data = JSON.stringify({
@@ -59,6 +61,7 @@ const FriendInvitationRow = ({ invitationId, requestor, getFriends }) => {
         size="small"
         variant="contained"
         color="success"
+
         onClick={() => handleResponse("yes")}
       >
         Accept
@@ -69,6 +72,7 @@ const FriendInvitationRow = ({ invitationId, requestor, getFriends }) => {
         size="small"
         variant="outlined"
         color="error"
+
         onClick={() => handleResponse("no")}
       >
         Decline
