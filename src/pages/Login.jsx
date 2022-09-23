@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { Box } from "@mui/material";
+import "./Login.css";
 
 const Login = () => {
   const { setToken } = useContext(AuthContext);
@@ -46,7 +47,7 @@ const Login = () => {
   ];
   return (
     <Box className="Login">
-      <h2>LOGIN</h2>
+      <h2 className="Title">LOGIN \n En 2 deux</h2>
       <Form
         submitField="Log In"
         fields={fields}

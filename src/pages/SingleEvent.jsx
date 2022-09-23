@@ -37,14 +37,12 @@ const SingleEvent = () => {
         for (const attendee of response.data.attendees) {
           if (attendee.user._id === user._id) {
             setCurrentAttendeeId(attendee._id);
-            console.log(attendee.user._id);
             if (attendee.isAdmin) {
               response.data.event.isAdmin = true;
             }
           }
         }
         setEventData(response.data);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -107,6 +105,7 @@ const SingleEvent = () => {
       {eventData.event.isAdmin && (
         <Box>
           <Button
+            color="success"
             size="small"
             onClick={(e) => {
               setisEditable((current) => !current);

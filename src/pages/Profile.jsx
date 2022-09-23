@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Button, CircularProgress } from "@mui/material";
 import ProfileInfos from "../components/Profile/ProfileInfos";
 import EditableProfileInfos from "../components/Profile/EditableProfileInfos";
+import "./Profile.css";
 
 const Profile = () => {
   const { token, user, setUser, logout } = useContext(AuthContext);
@@ -75,6 +76,7 @@ const Profile = () => {
 
       <Button
         size="small"
+        color="success"
         onClick={(e) => {
           setisEditable((current) => !current);
         }}

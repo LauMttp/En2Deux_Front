@@ -50,7 +50,9 @@ const FriendRow = ({ friend, getFriends, friendshipId }) => {
       </ListItemButton>
       <Button
         className="delete-button"
+        size="small"
         variant="contained"
+        color="error"
         onClick={() => handleDelete()}
       >
         Delete

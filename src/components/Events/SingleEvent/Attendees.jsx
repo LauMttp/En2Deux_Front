@@ -32,12 +32,15 @@ const Attendees = ({ eventData, deleteAttendee }) => {
   return (
     <Box className="attendee-box">
       <h4>Attendees</h4>
-      <SearchBar
-        relationStatus={attendeeStatus}
-        setRelationStatus={setAttendeeStatus}
-        checkRelation={checkAttending}
-        handleAdd={handleAdd}
-      />
+
+      {eventData.event.isAdmin && (
+        <SearchBar
+          relationStatus={attendeeStatus}
+          setRelationStatus={setAttendeeStatus}
+          checkRelation={checkAttending}
+          handleAdd={handleAdd}
+        />
+      )}
 
       {eventData.attendees.map((attendee) => {
         return !attendee.isAdmin ? (

@@ -5,6 +5,8 @@ import AllFriendInvitations from "../components/Friends/AllFriendInvitations";
 import AllFriends from "../components/Friends/AllFriends";
 import SearchBar from "../components/SearchBar";
 import { CircularProgress } from "@mui/material";
+import "./Friends.css";
+
 
 const Friends = () => {
   const { token, user } = useContext(AuthContext);
@@ -16,7 +18,8 @@ const Friends = () => {
     //get all friends list
     const config = {
       method: "get",
-      url: "https://endeuxdeux.herokuapp.com/api/friend/",
+      url: "http://localhost:5005/api/friend/",
+
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,7 +47,7 @@ const Friends = () => {
   const checkFriendship = (username) => {
     const config = {
       method: "get",
-      url: `https://endeuxdeux.herokuapp.com/api/friend/search?username=${username}`,
+      url: `http://localhost:5005/api/friend/search?username=${username}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,7 +79,7 @@ const Friends = () => {
   const handleAdd = (searchedUser) => {
     const config = {
       method: "post",
-      url: `https://endeuxdeux.herokuapp.com/api/friend/${searchedUser[0]._id}`,
+      url: `http://localhost:5005/api/friend/${searchedUser[0]._id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

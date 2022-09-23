@@ -1,0 +1,13 @@
+.Main {
+  min-height: 68vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+.World {
+  text-decoration: line-through;
+}

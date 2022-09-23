@@ -1,11 +1,8 @@
 .Stage {
-    display:flex;
-    flex-flow:row;
-    margin:1px;
-    padding:2px;
+  display: flex;
+  flex-flow: row;
+  margin: 1px;
+  padding: 2px;
 }
-/* 
-.single-event{
-    display:flex;
-    flex-flow: row;
-} */
+
+

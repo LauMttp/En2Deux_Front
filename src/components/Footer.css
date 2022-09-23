@@ -1,0 +1,16 @@
+.Footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 2vh;
+  position: sticky;
+  top: 100vh;
+  left: 0;
+  bottom: 0;
+  height: 15vh;
+  width: 100%;
+  background-color: #f9eaff;
+  color: #1a5e20;
+  text-align: center;
+}
