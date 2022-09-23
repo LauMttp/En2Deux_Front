@@ -5,7 +5,7 @@
   align-items: center;
   margin: auto;
   padding: 1rem;
-  border-bottom: 1px solid;
+  background-color: #f9eaff;
 }
 
 .menu-right {
@@ -17,4 +17,15 @@
 
 .menu-right button {
   margin-left: 10px;
+}
+
+.Logo {
+  background-color: red;
+  padding-inline: 1rem;
+  margin: 1rem;
+  color: white;
+}
+
+a {
+  text-decoration: none;
 }

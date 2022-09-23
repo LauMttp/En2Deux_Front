@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import StepOne from "../components/Events/NewEvent/StepOne";
 import StepTwo from "../components/Events/NewEvent/StepTwo";
 import StepThree from "../components/Events/NewEvent/StepThree";
+import "./NewEvent.css";
 
 const NewEvent = () => {
   const initialEventState = {
@@ -44,7 +45,7 @@ const NewEvent = () => {
   }
 
   return (
-    <div>
+    <div className="NewEvent">
       <h2>NEW EVENT</h2>
       {step === 0 && (
         <StepOne

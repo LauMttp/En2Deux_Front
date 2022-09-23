@@ -9,7 +9,7 @@ const Informations = ({ eventData }) => {
     <Box className="admin-box">
       <h1>{eventData.event.name}</h1>
       <p>
-        Created by : {eventData.event.author.name}{" "}
+        <b>Created by :</b> {eventData.event.author.name}{" "}
         {eventData.event.author.surname}{" "}
       </p>
       <h4>Administrators</h4>
@@ -34,8 +34,14 @@ const Informations = ({ eventData }) => {
           </>
         ) : null
       )}
-      <p>Description :{eventData.event.description}</p>
-      <p>Duration:{eventData.event.durationInHours / 24} days</p>
+      <p>
+        <b>Description :</b>
+        {eventData.event.description}
+      </p>
+      <p>
+        <b>Duration:</b>
+        {eventData.event.durationInHours / 24} days
+      </p>
     </Box>
   );
 };

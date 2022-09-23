@@ -59,7 +59,7 @@ const Stage = ({ eventData, eventId, setEventData, currentAttendeeId }) => {
       <div className="StageHeader">
         <h2>Stage : {eventData.event.stage}</h2>
         {eventData.event.isAdmin && (
-          <Button size="small" onClick={closeCurrentStage}>
+          <Button color="success" size="small" onClick={closeCurrentStage}>
             close the current stage
           </Button>
         )}

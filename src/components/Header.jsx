@@ -9,22 +9,30 @@ const Header = () => {
   return (
     <header className="App-header">
       <Link to="/">
-        <h1>En Deux Deux</h1>
+        <h1 className="Logo">En2Deux</h1>
       </Link>
 
       {isLoggedIn ? (
         <div className="menu-right">
           <Link to="/profile">
-            <Button variant="outlined">Profile</Button>
+            <Button color="success" variant="outlined">
+              Profile
+            </Button>
           </Link>
           <Link to="/events">
-            <Button variant="outlined">Events</Button>
+            <Button color="success" variant="outlined">
+              Events
+            </Button>
           </Link>
           <Link to="/invitations">
-            <Button variant="outlined">Invitations</Button>
+            <Button color="success" variant="outlined">
+              Invitations
+            </Button>
           </Link>
           <Link to="/friends">
-            <Button variant="outlined">friends</Button>
+            <Button color="success" variant="outlined">
+              friends
+            </Button>
           </Link>
           <Button variant="contained" color="error" onClick={logout}>
             Log Out
@@ -33,11 +41,15 @@ const Header = () => {
       ) : (
         <div className="menu-right">
           <Link to="/login">
-            <Button variant="contained">Login</Button>
+            <Button color="success" variant="contained">
+              Login
+            </Button>
           </Link>
 
           <Link to="/signup">
-            <Button variant="outlined">Sign Up</Button>
+            <Button color="success" variant="outlined">
+              Sign Up
+            </Button>
           </Link>
         </div>
       )}

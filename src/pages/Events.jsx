@@ -63,7 +63,7 @@ const Events = () => {
           {adminAttendances.length === 0 ? (
             <>
               <li>
-                Your don't have events yet.
+                Your don't have events yet ..
                 <br />
                 You can create one and invite your friends to participate!
               </li>

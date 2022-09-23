@@ -5,13 +5,27 @@ const ProfileInfos = ({ tempUser }) => {
   if (!tempUser) return <div>Loading</div>;
   return (
     <Box className="ProfileInfos">
-      <p>Username : {tempUser.username}</p>
-      <p>Name : {tempUser.name}</p>
-      <p>Surname : {tempUser.surname}</p>
-      <p>E-mail address : {tempUser.email}</p>
-      <p>Phone Number : {tempUser.phoneNumber}</p>
-      <p>Gender : {tempUser.gender}</p>
-      <p>Birthdate : NOT DEFINED</p>
+      <p>
+        <b>Username :</b> {tempUser.username}
+      </p>
+      <p>
+        <b>Name :</b> {tempUser.name}
+      </p>
+      <p>
+        <b>Surname :</b> {tempUser.surname}
+      </p>
+      <p>
+        <b>E-mail address :</b> {tempUser.email}
+      </p>
+      <p>
+        <b>Phone Number :</b> {tempUser.phoneNumber}
+      </p>
+      <p>
+        <b>Gender :</b> {tempUser.gender}
+      </p>
+      <p>
+        <b>Birthdate :</b> NOT DEFINED
+      </p>
     </Box>
   );
 };

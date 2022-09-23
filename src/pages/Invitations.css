@@ -6,3 +6,7 @@
   margin: 1px;
   padding: 2px;
 }
+
+.Main {
+  min-height: 66vh;
+}

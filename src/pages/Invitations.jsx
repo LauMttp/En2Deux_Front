@@ -56,12 +56,12 @@ const Invitations = () => {
   if (!token) return <CircularProgress color="secondary" />;
 
   return (
-    <div>
+    <div className="Main">
       <h2>Invitations</h2>
       <ul>
         {invitations.length === 0 ? (
           <>
-            <li>Your don't have invitations yet.</li>
+            <li>Your don't have invitations yet ..</li>
           </>
         ) : (
           invitations.map((invitation) => {

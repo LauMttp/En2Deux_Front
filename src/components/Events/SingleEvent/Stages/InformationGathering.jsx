@@ -17,7 +17,7 @@ const InformationGathering = ({ eventData, currentAttendeeId }) => {
   const { token } = useContext(AuthContext);
   const baseUrl = "http://localhost:5005";
   const [attendeeInformations, setAttendeeInformations] = useState({
-    availabilities: "",
+    availabilities: [],
     budget: 50,
     location: "",
   });
@@ -43,6 +43,8 @@ const InformationGathering = ({ eventData, currentAttendeeId }) => {
         console.log(error);
       });
   };
+
+  console.log(attendeeInformations.availabilities);
 
   return (
     <Box className="Gathering">
