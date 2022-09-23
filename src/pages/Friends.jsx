@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import { CircularProgress } from "@mui/material";
 import "./Friends.css";
 
+
 const Friends = () => {
   const { token, user } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
@@ -18,6 +19,7 @@ const Friends = () => {
     const config = {
       method: "get",
       url: "http://localhost:5005/api/friend/",
+
       headers: {
         Authorization: `Bearer ${token}`,
       },

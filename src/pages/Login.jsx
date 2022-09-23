@@ -20,7 +20,7 @@ const Login = () => {
   const logIn = (event) => {
     const config = {
       method: "post",
-      baseURL: "http://localhost:5005",
+      baseURL: "https://endeuxdeux.herokuapp.com",
       url: "/api/auth/login",
       headers: {
         "Content-Type": "application/json",

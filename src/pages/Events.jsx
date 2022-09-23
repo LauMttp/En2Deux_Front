@@ -10,7 +10,7 @@ const Events = () => {
   const [adminAttendances, setAdminAttendances] = useState([]);
   const [notAdminAttendances, setNotAdminAttendances] = useState([]);
 
-  const baseUrl = "http://localhost:5005";
+  const baseUrl = "https://endeuxdeux.herokuapp.com";
 
   useEffect(() => {
     const config = {
